@@ -9,10 +9,10 @@ export default function Header({ theme, setTheme }: { theme: string, setTheme: (
             <Link href="/">Home</Link>
           </div>
           <div>
-            <Link href="/my-plans">My plans</Link>
+            <Link href="/saved">My plans</Link>
           </div>
           <div>
-            <Link href="/preview-plan">Preview Plan</Link>
+            <Link href="/plan">Preview Plan</Link>
           </div>
         </nav>
       </header>
