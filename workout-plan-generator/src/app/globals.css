@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --wpg-main-text-color: #E8FF47;
+  --wpg-muted-text-color: #9e9a94;
 }
 
 @theme inline {

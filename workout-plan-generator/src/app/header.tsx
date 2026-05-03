@@ -4,7 +4,7 @@ export default function Header() {
   return(
     <>
       <nav className="flex w-screen items-center justify-between px-8 py-5 font-sans tracking-[2px] border-b border-[#2e2e2e]">
-        <div className="text-[#E8FF47] text-[28px] font-bold">
+        <div className="text-(--wpg-main-text-color) text-[28px] font-bold">
           WPG
         </div>
 
@@ -23,7 +23,7 @@ export default function Header() {
         </ul>
 
         <div className="flex items-center">
-          <button className="bg-[#e8ff47] px-5 py-2 text-black text-[13px]">
+          <button className="bg-(--wpg-main-text-color) px-5 py-2 text-black text-[13px]">
             Sign in
           </button>
         </div>
