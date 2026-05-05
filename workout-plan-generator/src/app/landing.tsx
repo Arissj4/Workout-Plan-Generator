@@ -1,8 +1,15 @@
+"use client"
+import { useState } from "react";
+
 export default function Landing(){
+  const goals: Array<string> = ["Build muscle", "Lost fat", "Improve endurance", "Stay active"];
+
+  const [selectedGoal, setGoal] = useState<number>(0);
+
   return(
     <>
-      <div className="wrapper flex h-full">
-        <div  className="wrapper wrapper-left py-15 px-12 max-w-[50%]">
+      <div className="wrapper flex flex-1 h-full">
+        <div  className="wrapper wrapper-left py-15 px-12 min-w-[50%]">
           <div className="wrapper-left--tag text-(--wpg-main-text-color) text-[11px] mb-6 tracking-[3px]">
             AI-POWERED TRAINING
           </div>
@@ -36,8 +43,37 @@ export default function Landing(){
           </div>
         </div>
 
-        <div className="wrapper wrapper-right w-full max-w-[50%] h-auto bg-[#1a1a1a] border-l border-[#2e2e2e]">
+        <div className="wrapper wrapper-right flex justify-center items-center w-[50%] h-auto py-15 px-12 bg-[#1a1a1a] border-l border-[#2e2e2e]">
+          <form className="w-full">
+            <div className="w-full mb-7">
+              <div className="text-[28px] mb-1.5 tracking-[1px]">
+                Your details
+              </div>
 
+              <div className="text-[13px] text-(--wpg-muted-text-color)">
+                Takes less than 60 seconds
+              </div>
+            </div>
+
+            <div>
+              <div className="uppercase text-[11px] text-(--wpg-muted-text-color) tracking-[2px] mb-2 font-medium">
+                Your goal
+              </div>
+              <div className="flex gap-2 flex-wrap">
+                {goals.map((goal, index) => {
+                  return (
+                    <button
+                      key={index}
+                      className="text-[13px] text-(--wpg-muted-text-color) cursor-pointer border border-(--wpg-border-color) px-4 py-2 focus:text-(--wpg-accent-color) focus:border focus:border-(--wpg-accent-color) focus:bg-[rgba(232,255,71,.06)]"
+                      onClick={() => setGoal(index)}
+                    >
+                      {goal}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </>

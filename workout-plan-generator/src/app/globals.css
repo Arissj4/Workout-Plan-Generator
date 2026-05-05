@@ -5,6 +5,8 @@
   --foreground: #171717;
   --wpg-main-text-color: #E8FF47;
   --wpg-muted-text-color: #9e9a94;
+  --wpg-accent-color: #e8ff47;
+  --wpg-border-color: #2e2e2e;
 }
 
 @theme inline {
