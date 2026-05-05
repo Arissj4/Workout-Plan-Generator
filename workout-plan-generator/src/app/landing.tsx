@@ -3,8 +3,18 @@ import { useState } from "react";
 
 export default function Landing(){
   const goals: Array<string> = ["Build muscle", "Lost fat", "Improve endurance", "Stay active"];
+  const levels: Array<string> = ["Beginner", "Intermediate", "Advanced"];
+  const equipments: Array<string> = ["Barbell", "Dumbbell", "Cables", "Machine", "Bodyweight only"];
 
   const [selectedGoal, setGoal] = useState<number>(0);
+  const [selectedDays, setDays] = useState<number>(1);
+  const [selectedLength, setLength] = useState<number>(1);
+  const [selectedLevel, setLevel] = useState<number>(0);
+  const [selectedEquipment, setEquipment] = useState<Array<number>>([]);
+
+
+
+
 
   return(
     <>
@@ -55,7 +65,7 @@ export default function Landing(){
               </div>
             </div>
 
-            <div>
+            <div className="mb-5">
               <div className="uppercase text-[11px] text-(--wpg-muted-text-color) tracking-[2px] mb-2 font-medium">
                 Your goal
               </div>
@@ -66,8 +76,93 @@ export default function Landing(){
                       key={index}
                       className="text-[13px] text-(--wpg-muted-text-color) cursor-pointer border border-(--wpg-border-color) px-4 py-2 focus:text-(--wpg-accent-color) focus:border focus:border-(--wpg-accent-color) focus:bg-[rgba(232,255,71,.06)]"
                       onClick={() => setGoal(index)}
+                      type="button"
                     >
                       {goal}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-5">
+              <div>
+                <div className="uppercase text-[11px] text-(--wpg-muted-text-color) tracking-[2px] mb-2 font-medium">
+                  days per week
+                </div>
+                <div>
+                  <select
+                    className="w-full bg-(--wpg-card-color) border border-(--wpg-border-color) text-white px-4 py-3 text-[14px] font-light outline-0"
+                    onChange={ (e) => setDays(parseInt(e.target.value))}
+                  >
+                    <option value="1" className="bg-[#242424]" selected>1 day</option>
+                    <option value="2" className="bg-[#242424]">2 days</option>
+                    <option value="3" className="bg-[#242424]">3 days</option>
+                    <option value="4" className="bg-[#242424]">4 days</option>
+                    <option value="5" className="bg-[#242424]">5 days</option>
+                    <option value="6" className="bg-[#242424]">6 days</option>
+                    <option value="7" className="bg-[#242424]">7 days</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <div className="uppercase text-[11px] text-(--wpg-muted-text-color) tracking-[2px] mb-2 font-medium">
+                  session length
+                </div>
+                <div>
+                  <select
+                    className="w-full bg-(--wpg-card-color) border border-(--wpg-border-color) text-white px-4 py-3 text-[14px] font-light outline-0"
+                    onChange={ (e) => setLength(parseInt(e.target.value))}
+                  >
+                    <option value="1" className="bg-[#242424]" selected>30 min</option>
+                    <option value="2" className="bg-[#242424]">45 min</option>
+                    <option value="3" className="bg-[#242424]">60 min</option>
+                    <option value="4" className="bg-[#242424]">90 min</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-5">
+              <div className="uppercase text-[11px] text-(--wpg-muted-text-color) tracking-[2px] mb-2 font-medium">
+                fitness level
+              </div>
+              <div className="flex gap-2 flex-wrap">
+                {levels.map((level, index) => {
+                  return (
+                    <button
+                      key={index}
+                      className="text-[13px] text-(--wpg-muted-text-color) cursor-pointer border border-(--wpg-border-color) px-4 py-2 focus:text-(--wpg-accent-color) focus:border focus:border-(--wpg-accent-color) focus:bg-[rgba(232,255,71,.06)]"
+                      onClick={() => setLevel(index)}
+                      type="button"
+                    >
+                      {level}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="mb-5">
+              <div className="uppercase text-[11px] text-(--wpg-muted-text-color) tracking-[2px] mb-2 font-medium">
+                equipment available
+              </div>
+              <div className="flex gap-2 flex-wrap">
+                {equipments.map((equipment, index) => {
+                  return (
+                    <button
+                      key={index}
+                      className="text-[13px] text-(--wpg-muted-text-color) cursor-pointer border border-(--wpg-border-color) px-4 py-2 focus:text-(--wpg-accent-color) focus:border focus:border-(--wpg-accent-color) focus:bg-[rgba(232,255,71,.06)]"
+                      onClick={() => {
+                        if (!selectedEquipment.includes(index)) {
+                          setEquipment(selectedEquipment.filter((item) => item !== index));
+                        } else {
+                          setEquipment([...selectedEquipment, index]);
+                        }
+                      }}
+                      type="button"
+                    >
+                      {equipment}
                     </button>
                   )
                 })}
