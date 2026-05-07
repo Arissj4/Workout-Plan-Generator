@@ -74,7 +74,7 @@ export default function Landing(){
                   return (
                     <button
                       key={index}
-                      className="text-[13px] text-(--wpg-muted-text-color) cursor-pointer border border-(--wpg-border-color) px-4 py-2 focus:text-(--wpg-accent-color) focus:border focus:border-(--wpg-accent-color) focus:bg-[rgba(232,255,71,.06)]"
+                      className={`text-[13px] cursor-pointer border px-4 py-2 ${selectedGoal === index ? "text-(--wpg-accent-color) border-(--wpg-accent-color) bg-[rgba(232,255,71,.06)]" : "text-(--wpg-muted-text-color) border-(--wpg-border-color)"}`}
                       onClick={() => setGoal(index)}
                       type="button"
                     >
@@ -132,7 +132,7 @@ export default function Landing(){
                   return (
                     <button
                       key={index}
-                      className="text-[13px] text-(--wpg-muted-text-color) cursor-pointer border border-(--wpg-border-color) px-4 py-2 focus:text-(--wpg-accent-color) focus:border focus:border-(--wpg-accent-color) focus:bg-[rgba(232,255,71,.06)]"
+                      className={`text-[13px] cursor-pointer border px-4 py-2 ${selectedLevel === index ? "text-(--wpg-accent-color) border-(--wpg-accent-color) bg-[rgba(232,255,71,.06)]" : "text-(--wpg-muted-text-color) border-(--wpg-border-color)"}`}
                       onClick={() => setLevel(index)}
                       type="button"
                     >
@@ -148,13 +148,14 @@ export default function Landing(){
                 equipment available
               </div>
               <div className="flex gap-2 flex-wrap">
+
                 {equipments.map((equipment, index) => {
                   return (
                     <button
                       key={index}
-                      className="text-[13px] text-(--wpg-muted-text-color) cursor-pointer border border-(--wpg-border-color) px-4 py-2 focus:text-(--wpg-accent-color) focus:border focus:border-(--wpg-accent-color) focus:bg-[rgba(232,255,71,.06)]"
+                      className={`text-[13px] cursor-pointer border px-4 py-2 ${selectedEquipment.includes(index) ? "text-(--wpg-accent-color) border-(--wpg-accent-color) bg-[rgba(232,255,71,.06)]" : "text-(--wpg-muted-text-color) border-(--wpg-border-color)"}`}
                       onClick={() => {
-                        if (!selectedEquipment.includes(index)) {
+                        if (selectedEquipment.includes(index)) {
                           setEquipment(selectedEquipment.filter((item) => item !== index));
                         } else {
                           setEquipment([...selectedEquipment, index]);
@@ -167,6 +168,16 @@ export default function Landing(){
                   )
                 })}
               </div>
+            </div>
+
+            <div className="mb-5">
+              <button
+                className={`w-full bg-(--wpg-accent-color) text-black text-[22px] tracking-[2px] cursor-pointer border p-4.5 mt-2 uppercase`}
+                onClick={() => {}}
+                type="submit"
+              >
+                generate my plan
+              </button>
             </div>
           </form>
         </div>
