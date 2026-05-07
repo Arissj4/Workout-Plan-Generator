@@ -13,9 +13,9 @@ export default function Header() {
             <Link href={"/"}>Home</Link>
           </li>
 
-          <li>
+          {/* <li>
             <Link href={"/saved"}>My Plans</Link>
-          </li>
+          </li> */}
 
           <li>
             <Link href={"/plan"}>Preview Plan</Link>

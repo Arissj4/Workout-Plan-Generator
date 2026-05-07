@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
 
             Respond ONLY with a valid JSON object in this exact structure, no extra text:
             {
+              "id": "Plan ID",
               "title": "Plan name",
               "days": [
                 {

@@ -1,18 +1,21 @@
 "use client"
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+type PlanPayload = {
+  goal: string;
+  days: number;
+  length: number;
+  level: string;
+  equipment: string[];
+}
 
 export default function Landing(){
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  type PlanPayload = {
-    goal: string;
-    days: number;
-    length: number;
-    level: string;
-    equipment: string[];
-  }
+  const router = useRouter();
 
   const goals: Array<string> = ["Build muscle", "Lost fat", "Improve endurance", "Stay active"];
   const levels: Array<string> = ["Beginner", "Intermediate", "Advanced"];
@@ -58,8 +61,10 @@ export default function Landing(){
         setError(data.error);
       } else {
         console.log(data.plan);
+        localStorage.setItem("currentPlan", JSON.stringify(data.plan));
+        router.push("/plan");
       }
-
+1
     } catch (error) {
       setError("Something went wrong, please try again later.");
     } finally {
