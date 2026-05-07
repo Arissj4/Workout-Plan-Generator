@@ -2,22 +2,79 @@
 import { useState } from "react";
 
 export default function Landing(){
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  type PlanPayload = {
+    goal: string;
+    days: number;
+    length: number;
+    level: string;
+    equipment: string[];
+  }
+
   const goals: Array<string> = ["Build muscle", "Lost fat", "Improve endurance", "Stay active"];
   const levels: Array<string> = ["Beginner", "Intermediate", "Advanced"];
   const equipments: Array<string> = ["Barbell", "Dumbbell", "Cables", "Machine", "Bodyweight only"];
 
   const [selectedGoal, setGoal] = useState<number>(0);
   const [selectedDays, setDays] = useState<number>(1);
-  const [selectedLength, setLength] = useState<number>(1);
+  const [selectedLength, setLength] = useState<number>(30);
   const [selectedLevel, setLevel] = useState<number>(0);
   const [selectedEquipment, setEquipment] = useState<Array<number>>([]);
 
+  async function handleGeneratePlan(event: React.FormEvent<HTMLFormElement>){
+    event.preventDefault();
 
+    if(selectedEquipment.length === 0){
+      alert("Please select at least one equipment");
+      return;
+    }
 
+    setIsLoading(true);
+    setError(null);
 
+    const payload: PlanPayload = {
+      goal: goals[selectedGoal],
+      days: selectedDays,
+      length: selectedLength,
+      level: levels[selectedLevel],
+      equipment: selectedEquipment.map((index) => equipments[index]),
+    }
+
+    try{
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (res.status !== 200) {
+        setError(data.error);
+      } else {
+        console.log(data.plan);
+      }
+
+    } catch (error) {
+      setError("Something went wrong, please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return(
     <>
+      {isLoading ?
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 text-white text-3xl animate-pulse flex-col gap-4 text-center ">
+          <div className="loader"></div>
+          Generating your plan...
+        </div>
+      : null}
       <div className="wrapper flex flex-1 h-full">
         <div  className="wrapper wrapper-left py-15 px-12 min-w-[50%]">
           <div className="wrapper-left--tag text-(--wpg-main-text-color) text-[11px] mb-6 tracking-[3px]">
@@ -54,7 +111,10 @@ export default function Landing(){
         </div>
 
         <div className="wrapper wrapper-right flex justify-center items-center w-[50%] h-auto py-15 px-12 bg-[#1a1a1a] border-l border-[#2e2e2e]">
-          <form className="w-full">
+          <form
+            className="w-full"
+            onSubmit={handleGeneratePlan}
+          >
             <div className="w-full mb-7">
               <div className="text-[28px] mb-1.5 tracking-[1px]">
                 Your details
@@ -94,8 +154,9 @@ export default function Landing(){
                   <select
                     className="w-full bg-(--wpg-card-color) border border-(--wpg-border-color) text-white px-4 py-3 text-[14px] font-light outline-0"
                     onChange={ (e) => setDays(parseInt(e.target.value))}
+                    defaultValue={1}
                   >
-                    <option value="1" className="bg-[#242424]" selected>1 day</option>
+                    <option value="1" className="bg-[#242424]">1 day</option>
                     <option value="2" className="bg-[#242424]">2 days</option>
                     <option value="3" className="bg-[#242424]">3 days</option>
                     <option value="4" className="bg-[#242424]">4 days</option>
@@ -113,11 +174,12 @@ export default function Landing(){
                   <select
                     className="w-full bg-(--wpg-card-color) border border-(--wpg-border-color) text-white px-4 py-3 text-[14px] font-light outline-0"
                     onChange={ (e) => setLength(parseInt(e.target.value))}
+                    defaultValue={30}
                   >
-                    <option value="1" className="bg-[#242424]" selected>30 min</option>
-                    <option value="2" className="bg-[#242424]">45 min</option>
-                    <option value="3" className="bg-[#242424]">60 min</option>
-                    <option value="4" className="bg-[#242424]">90 min</option>
+                    <option value="30" className="bg-[#242424]">30 min</option>
+                    <option value="45" className="bg-[#242424]">45 min</option>
+                    <option value="60" className="bg-[#242424]">60 min</option>
+                    <option value="90" className="bg-[#242424]">90 min</option>
                   </select>
                 </div>
               </div>
@@ -171,13 +233,20 @@ export default function Landing(){
             </div>
 
             <div className="mb-5">
+              {/* className={`w-full bg-(--wpg-accent-color) text-black text-[22px] tracking-[2px] cursor-pointer border p-4.5 mt-2 uppercase`} */}
               <button
-                className={`w-full bg-(--wpg-accent-color) text-black text-[22px] tracking-[2px] cursor-pointer border p-4.5 mt-2 uppercase`}
-                onClick={() => {}}
                 type="submit"
+                disabled={isLoading}
+                className={`w-full bg-(--wpg-accent-color) text-black text-[22px]
+                tracking-[2px] border p-4.5 mt-2 uppercase
+                ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
               >
-                generate my plan
+                {isLoading ? "GENERATING..." : "GENERATE MY PLAN"}
               </button>
+
+              {error && (
+                <p className="text-red-400 text-[13px] mt-2">{error}</p>
+              )}
             </div>
           </form>
         </div>
