@@ -24,6 +24,10 @@ export async function POST(req: NextRequest) {
             {
               "id": "Plan ID",
               "title": "Plan name",
+              "level": "Fitness level",
+              "time": "Session length in minutes",
+              "equipment": ["Equipment"],
+              "goal": "Workout goal",
               "days": [
                 {
                   "day": "Monday",
