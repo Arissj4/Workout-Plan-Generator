@@ -89,6 +89,9 @@ export default function Plan(){
 
       <div className="grid grid-cols-3 gap-4 mt-10">
         {plan.days.map((day, index) => (
+          day.isRest ?
+          <div className="border border-dashed border-[#2e2e2e] p-5"></div>
+          :
           <div
             key={index}
             className={`border p-5 ${
