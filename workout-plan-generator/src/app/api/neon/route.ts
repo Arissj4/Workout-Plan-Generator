@@ -3,7 +3,7 @@ import { neon } from "@neondatabase/serverless";
 
 export async function GET(req: NextRequest) {
   try{
-    const sql = neon(process.env.POSTGRES_URL!);
+    const sql = neon(process.env.postgres_wpg_db_POSTGRES_URL!);
     const response = await sql`SELECT * FROM users`;
     return NextResponse.json(response);
 
