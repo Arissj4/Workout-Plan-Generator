@@ -37,6 +37,21 @@ export default function Plan(){
   }, []);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("/api/neon", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      console.log(data);
+    };
+    fetchData();
+  }, [])
+
+  useEffect(() => {
     console.log(plan);
   }, [plan]);
 
