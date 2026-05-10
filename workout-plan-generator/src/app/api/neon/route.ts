@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
 
-export async function name(req: NextRequest) {
+export async function GET(req: NextRequest) {
   try{
     const sql = neon(process.env.POSTGRES_URL!);
     const response = await sql`SELECT * FROM users`;
