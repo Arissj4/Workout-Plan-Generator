@@ -19,6 +19,7 @@ export async function POST(req: NextRequest) {
             Their fitness level is ${level}.
             Each session should last ${length} minutes.
             Available equipment: ${equipment.join(", ")}.
+            Do not consider the rest days. Each day that is not inside the training days, considered as rest day.
 
             Respond ONLY with a valid JSON object in this exact structure, no extra text:
             {
@@ -32,7 +33,6 @@ export async function POST(req: NextRequest) {
                 {
                   "day": "Monday",
                   "focus": "Push",
-                  "isRest": false,
                   "exercises": [
                     { "name": "Bench Press", "sets": 4, "reps": 8 }
                   ]

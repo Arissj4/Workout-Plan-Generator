@@ -29,6 +29,7 @@ type Plan = {
 export default function Plan(){
 
   const [plan, setPlan] = useState<Plan | null>(null);
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
   useEffect(() => {
     const stored = localStorage.getItem("currentPlan");
@@ -88,28 +89,26 @@ export default function Plan(){
       </div>
 
       <div className="grid grid-cols-3 gap-4 mt-10">
-        {plan.days.map((day, index) => (
-          day.isRest ?
-          <div className="border border-dashed border-[#2e2e2e] p-5"></div>
-          :
+        {days.map((day, index) => (
           <div
             key={index}
             className={`border p-5 ${
-              day.isRest
-                ? "border-dashed border-[#2e2e2e]"
-                : "border-[#2e2e2e] bg-[#1a1a1a]"
+              plan.days.find(d => day === d.day)
+                ? "border-[#2e2e2e] bg-[#1a1a1a]"
+                : "border-dashed border-[#2e2e2e] flex justify-center items-center "
             }`}
           >
-            <div className="text-[22px] uppercase tracking-[1px] text-(--wpg-accent-color) mb-3">
-              {day.day} — {day.focus}
-            </div>
-
-            {day.isRest ? (
-              <div className="text-[#2e2e2e] text-[13px] tracking-[2px] uppercase text-center py-4">
-                Rest
+            {plan.days.find(d => day === d.day) ?
+            (
+              <div className="text-[22px] uppercase tracking-[1px] text-(--wpg-accent-color) mb-3">
+                {day} — {plan.days.find(d => day === d.day)?.focus}
               </div>
-            ) : (
-              day.exercises.map((ex, i) => (
+            )
+            : null
+            }
+
+            {plan.days.find(d => day === d.day) ?
+              plan.days.find(d => day === d.day)?.exercises.map((ex, i) => (
                 <div
                   key={i}
                   className="flex justify-between items-center py-2 border-b border-[#2e2e2e] last:border-0 text-[13px]"
@@ -120,7 +119,12 @@ export default function Plan(){
                   </span>
                 </div>
               ))
-            )}
+              : (
+                <div className="text-[#2e2e2e] text-[13px] tracking-[2px] uppercase text-center py-4">
+                  {day} - Rest
+                </div>
+              )
+            }
           </div>
         ))}
       </div>
