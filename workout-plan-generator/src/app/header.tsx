@@ -23,7 +23,10 @@ export default function Header() {
         </ul>
 
         <div className="flex items-center">
-          <button className="bg-(--wpg-main-text-color) px-5 py-2 text-black text-[13px]">
+          <button
+            className="bg-(--wpg-disabled-color) px-5 py-2 text-black text-[13px]"
+            disabled={true}
+          >
             Sign in
           </button>
         </div>
