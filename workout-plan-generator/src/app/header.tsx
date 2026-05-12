@@ -1,8 +1,8 @@
 "use client"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { use, useEffect, useState } from "react";
 
 type User = {
   name: string,
@@ -11,12 +11,10 @@ type User = {
 }
 
 
-type Props = {
-  user: User,
-}
+type Props = {}
 
 export default function Header(props: Props) {
-  const [user, setUser] = useState<User | null>(null);
+  const { data: session, status} = useSession();
   const router = useRouter();
 
   return(
@@ -31,7 +29,7 @@ export default function Header(props: Props) {
             <Link href={"/"}>Home</Link>
           </li>
 
-          {user ?
+          {session ?
             <li>
               <Link href={"/saved"}>My Plans</Link>
             </li>
@@ -45,7 +43,7 @@ export default function Header(props: Props) {
         </ul>
 
         <div className="flex items-center">
-          {user ?
+          {session ?
             <button
               className="bg-(--wpg-main-text-color) px-5 py-2 text-black text-[13px] hover:cursor-pointer"
               type="button"

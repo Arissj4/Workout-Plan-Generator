@@ -33,7 +33,7 @@ export default function RootLayout({
     >
       <body className="min-h-full h-screen flex flex-col">
         <SessionWrapper>
-          <Header/>
+          <Header />
           {children}
         </SessionWrapper>
       </body>
