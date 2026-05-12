@@ -1,6 +1,15 @@
+"use client"
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signIn, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+
   return(
     <>
       <nav className="flex w-full items-center justify-between px-8 py-5 font-sans tracking-[2px] border-b border-[#2e2e2e]">
@@ -13,9 +22,13 @@ export default function Header() {
             <Link href={"/"}>Home</Link>
           </li>
 
-          {/* <li>
-            <Link href={"/saved"}>My Plans</Link>
-          </li> */}
+          {session ?
+            <li>
+              <Link href={"/saved"}>My Plans</Link>
+            </li>
+          : null
+          }
+
 
           <li>
             <Link href={"/plan"}>Preview Plan</Link>
@@ -23,12 +36,23 @@ export default function Header() {
         </ul>
 
         <div className="flex items-center">
-          <button
-            className="bg-(--wpg-disabled-color) px-5 py-2 text-black text-[13px]"
-            disabled={true}
-          >
-            Sign in
-          </button>
+          {session ?
+            <button
+              className="bg-(--wpg-main-text-color) px-5 py-2 text-black text-[13px] hover:cursor-pointer"
+              type="button"
+              onClick={async () => await signOut()}
+            >
+              Sign out
+            </button>
+          :
+            <button
+              className="bg-(--wpg-main-text-color) px-5 py-2 text-black text-[13px] hover:cursor-pointer"
+              type="button"
+              onClick={async () => await signIn("google")}
+            >
+              Sign in
+            </button>
+          }
         </div>
       </nav>
     </>
