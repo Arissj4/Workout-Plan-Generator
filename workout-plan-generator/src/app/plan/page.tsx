@@ -109,7 +109,7 @@ export default function Plan(){
     }
   }
 
-  if (!plan) return <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">Loading plan...</div>;
+  // if (!plan) return <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">Loading plan...</div>;
 
   return (
 
@@ -125,7 +125,7 @@ export default function Plan(){
         <div className="flex">
           <div className="flex max-w-[70%]">
             <h1 className="text-[56px] uppercase tracking-[1px] leading-none mb-4">
-              {plan.title}
+              {plan?.title}
             </h1>
           </div>
 
@@ -151,19 +151,19 @@ export default function Plan(){
 
         <div className="flex gap-5">
           <div className="tag">
-            {plan.level}
+            {plan?.level}
           </div>
 
           <div className="tag">
-            {`${plan.days.length} ${plan.days.length === 1 ? "day" : "days"} / week`}
+            {`${plan?.days.length} ${plan?.days.length === 1 ? "day" : "days"} / week`}
           </div>
 
           <div className="tag">
-            {`${plan.time} min`}
+            {`${plan?.time} min`}
           </div>
 
           <div className="tag">
-            {plan.equipment.join(" + ")}
+            {plan?.equipment.join(" + ")}
           </div>
         </div>
 
@@ -172,22 +172,22 @@ export default function Plan(){
             <div
               key={index}
               className={`border p-5 ${
-                plan.days.find(d => day === d.day)
+                plan?.days.find(d => day === d.day)
                   ? "border-[#2e2e2e] bg-[#1a1a1a]"
                   : "border-dashed border-[#2e2e2e] flex justify-center items-center "
               }`}
             >
-              {plan.days.find(d => day === d.day) ?
+              {plan?.days.find(d => day === d.day) ?
               (
                 <div className="text-[22px] uppercase tracking-[1px] text-(--wpg-accent-color) mb-3">
-                  {day} — {plan.days.find(d => day === d.day)?.focus}
+                  {day} — {plan?.days.find(d => day === d.day)?.focus}
                 </div>
               )
               : null
               }
 
-              {plan.days.find(d => day === d.day) ?
-                plan.days.find(d => day === d.day)?.exercises.map((ex, i) => (
+              {plan?.days.find(d => day === d.day) ?
+                plan?.days.find(d => day === d.day)?.exercises.map((ex, i) => (
                   <div
                     key={i}
                     className="flex justify-between items-center py-2 border-b border-[#2e2e2e] last:border-0 text-[13px]"
