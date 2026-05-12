@@ -7,8 +7,10 @@ export default function SignIn( {provider}: {provider: string} ) { // This compo
   const router = useRouter();
 
   const handleSingIn = async () => {
-    await signIn("google");
-    router.push("/plan");
+    const res = await signIn("google");
+    if (res?.ok) {
+      router.push("/");
+    }
   }
 
   return (
