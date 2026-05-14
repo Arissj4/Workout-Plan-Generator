@@ -3,33 +3,15 @@
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { jsPDF } from "jspdf";
-
-type Exercise = {
-  name: string,
-  sets: number,
-  reps: number,
-}
-
-type Day = {
-  day: string;
-  focus: string;
-  isRest: boolean;
-  exercises: Exercise[];
-};
-
-type Plan = {
-  id: string;
-  title: string;
-  level: string;
-  equipment: string[];
-  goal: string;
-  time: number;
-  days: Day[];
-};
+import { useSession } from "next-auth/react";
+import type {Exercise, Day, Plan} from "@/app/lib/costumeTypes";
 
 export default function Plan(){
 
+  const {data: session, status} = useSession();
+
   const [isDownloading, setIsDownloading] = useState<Boolean>(false);
+  const [isSaving, setIsSaving] = useState<Boolean>(false);
 
   const [plan, setPlan] = useState<Plan | null>(null);
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -38,25 +20,6 @@ export default function Plan(){
     const stored = localStorage.getItem("currentPlan");
     if (stored) setPlan(JSON.parse(stored));
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/api/neon", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-
-      const data = await res.json();
-      console.log(data);
-    };
-    fetchData();
-  }, [])
-
-  useEffect(() => {
-    console.log(plan);
-  }, [plan]);
 
   const handleExportAsPDF = () => {
     try{
@@ -109,11 +72,43 @@ export default function Plan(){
     }
   }
 
+  const handleSavePlan = async () => {
+    try{
+      if(!session){
+        alert("You must be logged in to save a plan.");
+        return;
+      }
+
+      setIsSaving(true);
+
+      const res = await fetch("/api/neon", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({plan, user_email: session?.user?.email})
+      })
+
+      const data = await res.json();
+      if(data.success){
+        alert(data.message);
+      } else {
+        alert(`Error: ${data.message}`);
+      }
+    } catch (error){
+      console.log(error);
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
   // if (!plan) return <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">Loading plan...</div>;
+  if (isSaving) return <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">Saving plan...</div>
 
   return (
 
     <>
+
       {isDownloading ?
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 text-white text-3xl animate-pulse flex-col gap-4 text-center ">
           <div className="loader"></div>
@@ -131,7 +126,7 @@ export default function Plan(){
 
           <div className="flex flex-1 justify-end gap-2">
             <button
-              className="flex justify-center items-center max-h-11.75 gap-1 bg-transparent px-8 py-3 text-(--wpg-muted-text-color) text-[14px] font-medium border border-[#2e2e2e] cursor-pointer"
+              className="flex justify-center items-center max-h-11.75 gap-1 bg-transparent px-8 py-3 text-(--wpg-muted-text-color) text-[14px] font-medium border border-[#2e2e2e] cursor-pointer active:brightness-150"
               onClick={() => handleExportAsPDF()}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3.5">
@@ -140,12 +135,16 @@ export default function Plan(){
               Export as PDF
             </button>
 
-            <button
-              className="max-h-11.75 bg-(--wpg-disabled-color) px-8 py-3 text-black text-[14px] font-medium "
-              disabled={true}
-            >
-              Save Plan
-            </button>
+            {session?.user?.email ?
+              <button
+                className="max-h-11.75 bg-(--wpg-main-text-color) px-8 py-3 text-black text-[14px] font-medium hover:cursor-pointer active:bg-(--wpg-disabled-color)"
+                onClick={() => handleSavePlan()}
+              >
+                Save Plan
+              </button>
+            : null
+            }
+
           </div>
         </div>
 
