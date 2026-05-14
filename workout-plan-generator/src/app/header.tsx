@@ -20,6 +20,7 @@ export default function Header(props: Props) {
   const router = useRouter();
   const [showDropDown, setShowDropDown] = useState<Boolean>(false);
 
+
   return(
     <>
       <nav className="flex w-full items-center justify-between px-8 py-5 font-sans tracking-[2px] border-b border-[#2e2e2e]">
@@ -62,8 +63,12 @@ export default function Header(props: Props) {
               >
                 <img
                   className="rounded-full"
-                  src={session.user?.image ? session.user?.image : userIcon.src}
+                  src={session.user?.image || userIcon.src}
                   alt="User Icon"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src === userIcon.src;
+                  }}
                 />
               </div>
               {showDropDown ?
