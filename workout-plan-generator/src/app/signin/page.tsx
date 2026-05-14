@@ -59,7 +59,7 @@ export default function SignIn( {provider}: {provider: string} ) { // This compo
             </span>
           </button>
 
-          <div className="flex items-center gap-3 my-5">
+          {/* <div className="flex items-center gap-3 my-5">
             <div className="flex-1 h-px bg-[#2e2e2e]"/>
             <span className="text-[11px] text-[#5e5e5e] tracking-[1px]">
               OR
@@ -79,7 +79,7 @@ export default function SignIn( {provider}: {provider: string} ) { // This compo
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
             </svg>
-          </button>
+          </button> */}
 
           <p className="text-[11px] text-[#5e5e5e] text-center mt-5 leading-[1.6]">
             By continuing you agree to our Terms of Service and Privacy Policy
