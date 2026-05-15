@@ -4,19 +4,18 @@ import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { use, useEffect, useState } from "react";
 import  userIcon  from "@/../public/default-user-icon.svg";
+import type { User } from "@/app/lib/costumeTypes"
+import type { Session } from "next-auth";
 
 
-type User = {
-  name: string,
-  email: string,
-  image: string,
+
+
+type Props = {
+  session: Session | null;
 }
 
-
-type Props = {}
-
 export default function Header(props: Props) {
-  const { data: session, status} = useSession();
+  const { session } = props;
   const router = useRouter();
   const [showDropDown, setShowDropDown] = useState<Boolean>(false);
 

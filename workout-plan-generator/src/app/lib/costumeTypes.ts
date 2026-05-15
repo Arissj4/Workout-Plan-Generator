@@ -21,4 +21,10 @@ type Plan = {
   days: Day[];
 };
 
-export type {Exercise, Day, Plan};
+type User = {
+  name: string,
+  email: string,
+  image: string,
+}
+
+export type {Exercise, Day, Plan, User};
