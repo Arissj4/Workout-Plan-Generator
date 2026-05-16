@@ -64,6 +64,7 @@ export default function Header(props: Props) {
                   className="rounded-full"
                   src={session.user?.image || userIcon.src}
                   alt="User Icon"
+                  referrerPolicy="no-referrer"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src === userIcon.src;
