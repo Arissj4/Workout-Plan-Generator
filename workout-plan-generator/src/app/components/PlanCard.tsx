@@ -1,9 +1,9 @@
 "use client"
 import { redirect } from "next/navigation";
-import { SavedPlan } from "../lib/costumeTypes";
+import { Plan } from "../lib/costumeTypes";
 
-export default function PlanCard({plan}: {plan: SavedPlan}) {
-  console.log(plan)
+export default function PlanCard({plan}: {plan: Plan}) {
+
   return(
      <div
         key={plan?.id}
@@ -23,7 +23,7 @@ export default function PlanCard({plan}: {plan: SavedPlan}) {
           </div>
 
           <div className="tag">
-            {`${plan?.days} ${plan?.days === 1 ? "day" : "days"} / week`}
+            {`${plan?.days.length} ${plan?.days.length === 1 ? "day" : "days"} / week`}
           </div>
 
           <div className="tag">
