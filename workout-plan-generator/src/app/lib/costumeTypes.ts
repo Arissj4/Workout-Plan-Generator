@@ -27,4 +27,6 @@ type User = {
   image: string,
 }
 
-export type {Exercise, Day, Plan, User};
+type SavedPlan = Omit<Plan, "days"> & { days: number };
+
+export type {Exercise, Day, Plan, User, SavedPlan};
