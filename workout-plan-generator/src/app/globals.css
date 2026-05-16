@@ -36,3 +36,14 @@ body {
 {
   @apply text-[12px] text-(--wpg-muted-text-color) tracking-[0.5px] capitalize font-normal text-center  py-1 px-3.5 border border-(--wpg-border-color);
 }
+
+.hidden-scrollbar{
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -35,7 +35,7 @@ export default async function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full h-screen flex flex-col">
+      <body className="min-h-full h-screen flex flex-col overflow-hidden">
         <SessionWrapper session={session}>
           <Header session={session}/>
           {children}

@@ -6,8 +6,11 @@ import type { Day, Exercise, Plan } from "@/app/lib/costumeTypes"
 
 export async function GET(req: NextRequest) {
   try{
+    const session = await getServerSession(authOptions);
+    if (!session) return NextResponse.json({error: "Unauthorized"}, {status: 401});
+
     const sql = neon(process.env.postgres_wpg_db_POSTGRES_URL!);
-    const response = await sql`SELECT * FROM users`;
+    const response = await sql`SELECT * FROM workouts WHERE user_email = ${session.user?.email}`;
     return NextResponse.json(response);
 
   } catch (error) {
