@@ -55,6 +55,7 @@ export default async function Saved(){
         return {
           day: day.day as string,
           focus: day.focus as string,
+          isRest: false,
           exercises,
         };
       });

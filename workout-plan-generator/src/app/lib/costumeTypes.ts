@@ -7,6 +7,7 @@ type Exercise = {
 type Day = {
   day: string;
   focus: string;
+  isRest: boolean;
   exercises: Exercise[];
 };
 
