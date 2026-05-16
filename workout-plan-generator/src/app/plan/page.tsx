@@ -102,7 +102,7 @@ export default function Plan(){
     }
   }
 
-  // if (!plan) return <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">Loading plan...</div>;
+  if (!plan) return <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">Loading plan...</div>;
   if (isSaving) return <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">Saving plan...</div>
 
   return (
@@ -173,7 +173,7 @@ export default function Plan(){
               className={`border p-5 ${
                 plan?.days.find(d => day === d.day)
                   ? "border-[#2e2e2e] bg-[#1a1a1a]"
-                  : "border-dashed border-[#2e2e2e] flex justify-center items-center "
+                  : "border-dashed border-[#2e2e2e] flex justify-center items-center"
               }`}
             >
               {plan?.days.find(d => day === d.day) ?
