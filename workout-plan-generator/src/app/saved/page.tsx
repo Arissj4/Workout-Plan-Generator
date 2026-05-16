@@ -4,6 +4,7 @@ import { neon } from "@neondatabase/serverless";
 import { redirect } from "next/navigation";
 import PlanCard from "@/app/components/PlanCard";
 import type { Plan, Day, Exercise } from "../lib/costumeTypes";
+import PlanDialog from "../components/PlanDialog";
 
 
 export default async function Saved(){

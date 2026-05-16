@@ -14,7 +14,7 @@ export default function Plan(){
   const [isSaving, setIsSaving] = useState<Boolean>(false);
 
   const [plan, setPlan] = useState<Plan | null>(null);
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
   useEffect(() => {
     const stored = localStorage.getItem("currentPlan");
@@ -116,7 +116,7 @@ export default function Plan(){
         </div>
       : null}
 
-      <div className="flex flex-col p-12 max-w-6xl mx-auto">
+      <div className="flex flex-col p-12 max-w-6xl mx-auto h-full">
         <div className="flex">
           <div className="flex max-w-[70%]">
             <h1 className="text-[56px] uppercase tracking-[1px] leading-none mb-4">
@@ -166,7 +166,7 @@ export default function Plan(){
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mt-10">
+        <div className="grid grid-cols-3 gap-4 mt-10 pb-20 overflow-scroll hidden-scrollbar">
           {days.map((day, index) => (
             <div
               key={index}

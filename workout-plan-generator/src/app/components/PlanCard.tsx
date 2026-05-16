@@ -1,15 +1,22 @@
 "use client"
-import { redirect } from "next/navigation";
 import { Plan } from "../lib/costumeTypes";
+import { useState } from "react";
+import PlanDialog from "./PlanDialog";
 
 export default function PlanCard({plan}: {plan: Plan}) {
+  const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
 
   return(
+    <>
+      {selectedPlan && (
+        <PlanDialog plan={selectedPlan} closeDialog={() => setSelectedPlan(null)}/>
+      )}
+
      <div
         key={plan?.id}
         className="flex flex-col justify-between border p-5 border-[#2e2e2e] bg-[#1a1a1a] hover:cursor-pointer"
         onClick={() => {
-          redirect(`/plan/${plan.id}`)
+          setSelectedPlan(plan);
         }}
       >
         <div className="text-[22px] uppercase tracking-[1px] text-(--wpg-accent-color) mb-3"
@@ -35,5 +42,6 @@ export default function PlanCard({plan}: {plan: Plan}) {
           </div>
         </div>
       </div>
+    </>
   )
 }
