@@ -133,7 +133,7 @@ export default function Plan(){
       <div className="flex flex-col p-12 mx-auto max-w-6xl w-full h-full overflow-scroll hidden-scrollbar">
         <div className="flex">
           <div className="flex max-w-[70%]">
-            <h1 className="not-lg:text-[13vw] not-lg:wrap-anywhere not-lg:whitespace-normal text-[56px] uppercase tracking-[1px] leading-none mb-4">
+            <h1 className="not-lg:text-[11vw] not-lg:wrap-break-word not-lg:whitespace-normal text-[56px] uppercase tracking-[1px] leading-none mb-4">
               {plan?.title}
             </h1>
           </div>
