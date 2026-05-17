@@ -15,7 +15,7 @@ export default function SignIn( {provider}: {provider: string} ) { // This compo
 
   return (
     <>
-      <div className="flex h-full not-lg:flex-col overflow-scroll hidden-scrollbar">
+      <div className="flex flex-1 h-full not-lg:flex-col overflow-scroll hidden-scrollbar">
 
         <div
           className="w-1/2 bg-[#0e0e0e] p-14 flex flex-col justify-center not-lg:w-full"

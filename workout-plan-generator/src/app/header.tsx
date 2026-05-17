@@ -161,7 +161,7 @@ export default function Header(props: Props) {
                   </div>
                 </div>
                 <button
-                  className="w-full text-center bg-transparent px-4 py-2 text-(--wpg-main-text-color) border border-(--wpg-border-color) hover:text-white hover:bg-[#2e2e2e] rounded-sm text-[13px] transition-colors cursor-pointer"
+                  className="w-full text-center bg-transparent px-4 py-2 not-lg:text-[2vw] text-(--wpg-main-text-color) border border-(--wpg-border-color) hover:text-white hover:bg-[#2e2e2e] rounded-sm text-[13px] transition-colors cursor-pointer"
                   type="button"
                   onClick={async () => {await signOut(); setIsOpen(false)}}
                 >
@@ -171,7 +171,7 @@ export default function Header(props: Props) {
             ) : (
               <button
                 onClick={() => {router.push("/signin"); setIsOpen(false)}}
-                className="w-full bg-(--wpg-main-text-color) py-3 text-black text-[18px] tracking-[2px] cursor-pointer uppercase"
+                className="w-full bg-(--wpg-main-text-color) not-lg:text-[2vw] py-3 text-black text-[18px] tracking-[2px] cursor-pointer uppercase"
               >
                 Sign in
               </button>
