@@ -55,9 +55,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       {
-        message: "Plan saved successfully"
-      }
-    );
+        message: "Plan saved successfully",
+        success: true
+      },
+      { status: 200 });
   } catch (error) {
     return NextResponse.json(
       {error: "Failed to save the plan", details: String(error)},

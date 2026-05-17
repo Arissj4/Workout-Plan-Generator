@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { jsPDF } from "jspdf";
 import { useSession } from "next-auth/react";
 import type {Exercise, Day, Plan} from "@/app/lib/costumeTypes";
+import MessageComponent from "../components/MessageComponent";
 
 export default function Plan(){
 
@@ -12,6 +13,8 @@ export default function Plan(){
 
   const [isDownloading, setIsDownloading] = useState<Boolean>(false);
   const [isSaving, setIsSaving] = useState<Boolean>(false);
+  const [successfulSave, setSuccessfulSave] = useState<Boolean>(false);
+  const [failedSave, setFailedSave] = useState<Boolean>(false);
 
   const [plan, setPlan] = useState<Plan | null>(null);
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -91,14 +94,18 @@ export default function Plan(){
 
       const data = await res.json();
       if(data.success){
-        alert(data.message);
+        setSuccessfulSave(true);
       } else {
-        alert(`Error: ${data.message}`);
+        setFailedSave(true);
       }
     } catch (error){
-      console.log(error);
+      setFailedSave(true);
     } finally {
       setIsSaving(false);
+      const delay = () => new Promise(res => setTimeout(res, 2000));
+      await delay();
+      setSuccessfulSave(false);
+      setFailedSave(false);
     }
   }
 
@@ -108,6 +115,13 @@ export default function Plan(){
   return (
 
     <>
+      {successfulSave ?
+        <MessageComponent message={"Plan saved successfully!"} duration={2000} type="success"/>
+      : null}
+
+      {failedSave ?
+        <MessageComponent message={"Failed to save plan!"} duration={2000} type="error"/>
+      : null}
 
       {isDownloading ?
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 text-white text-3xl animate-pulse flex-col gap-4 text-center ">
