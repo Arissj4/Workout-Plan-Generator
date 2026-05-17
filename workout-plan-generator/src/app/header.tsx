@@ -1,10 +1,9 @@
 "use client"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
-import { use, useEffect, useState } from "react";
+import { signOut } from "next-auth/react";
+import { useState } from "react";
 import  userIcon  from "@/../public/default-user-icon.svg";
-import type { User } from "@/app/lib/costumeTypes"
 import type { Session } from "next-auth";
 
 
@@ -25,9 +24,12 @@ export default function Header(props: Props) {
         className="flex flex-col w-full items-center justify-between lg:py-5 pt-5 font-sans tracking-[2px] border-b border-[#2e2e2e]"
       >
         <div className="flex w-full not-lg:justify-between px-8">
-          <div className="w-30 text-(--wpg-main-text-color) text-[28px] font-bold">
+          <button
+            className="w-30 text-(--wpg-main-text-color) text-[28px] font-bold hover:cursor-pointer"
+            onClick={() => router.push("/")}
+          >
             WPG
-          </div>
+          </button>
 
           <ul className="hidden lg:flex justify-center w-full gap-7 text-[13px] items-center">
             <li>
