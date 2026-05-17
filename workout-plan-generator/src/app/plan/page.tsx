@@ -138,9 +138,9 @@ export default function Plan(){
             </h1>
           </div>
 
-          <div className="flex flex-1 justify-end gap-2">
+          <div className="flex flex-col items-end flex-1 justify-center gap-2 not-lg:hidden">
             <button
-              className="flex justify-center items-center max-h-11.75 gap-1 bg-transparent px-8 py-3 text-(--wpg-muted-text-color) text-[14px] font-medium border border-[#2e2e2e] cursor-pointer active:brightness-150"
+              className="flex w-45 justify-center items-center max-h-11.75 gap-1 bg-transparent px-8 py-3 text-(--wpg-muted-text-color) text-[14px] font-medium border border-[#2e2e2e] cursor-pointer active:brightness-150"
               onClick={() => handleExportAsPDF()}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3.5">
@@ -151,7 +151,7 @@ export default function Plan(){
 
             {session?.user?.email ?
               <button
-                className="max-h-11.75 bg-(--wpg-main-text-color) px-8 py-3 text-black text-[14px] font-medium hover:cursor-pointer active:bg-(--wpg-disabled-color)"
+                className="w-45 max-h-11.75 bg-(--wpg-main-text-color) px-8 py-3 mt-2 text-black text-[14px] font-medium hover:cursor-pointer active:bg-(--wpg-disabled-color)"
                 onClick={() => handleSavePlan()}
               >
                 Save Plan
@@ -178,6 +178,29 @@ export default function Plan(){
           <div className="tag">
             {plan?.equipment.join(" + ")}
           </div>
+        </div>
+
+        <div className="lg:hidden flex items-end flex-1 justify-start gap-2 mt-4">
+          <button
+            className="flex w-45 justify-center items-center max-h-11.75 gap-1 bg-transparent px-8 py-3 text-(--wpg-muted-text-color) text-[14px] font-medium border border-[#2e2e2e] cursor-pointer active:brightness-150"
+            onClick={() => handleExportAsPDF()}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+            </svg>
+            Export as PDF
+          </button>
+
+          {session?.user?.email ?
+            <button
+              className="w-45 max-h-11.75 bg-(--wpg-main-text-color) px-8 py-3 mt-2 text-black text-[14px] font-medium hover:cursor-pointer active:bg-(--wpg-disabled-color)"
+              onClick={() => handleSavePlan()}
+            >
+              Save Plan
+            </button>
+          : null
+          }
+
         </div>
 
         <div className="grid grid-cols-3 gap-4 mt-10 pb-20">
