@@ -80,8 +80,9 @@ export default function Landing(){
           Generating your plan...
         </div>
       : null}
-      <div className="wrapper flex flex-1 h-full">
-        <div  className="wrapper wrapper-left py-15 px-12 min-w-[50%]">
+
+      <div className="wrapper flex flex-1 h-full not-lg:flex-col">
+        <div  className="wrapper wrapper-left flex flex-col justify-center py-15 px-12 min-w-[50%]">
           <div className="wrapper-left--tag text-(--wpg-main-text-color) text-[11px] mb-6 tracking-[3px]">
             AI-POWERED TRAINING
           </div>
@@ -100,7 +101,7 @@ export default function Landing(){
             Answer a few questions. Get a personalized weekly workout plan built for your body, your goals, and your schedule.
           </p>
 
-          <div className="flex gap-3">
+          {/* <div className="flex gap-3">
             <button
               className="bg-(--wpg-main-text-color) px-8 py-3 text-black text-[14px] font-medium cursor-pointer"
             >
@@ -112,10 +113,10 @@ export default function Landing(){
             >
               View Saved Plan
             </button>
-          </div>
+          </div> */}
         </div>
 
-        <div className="wrapper wrapper-right flex justify-center items-center w-[50%] h-auto py-15 px-12 bg-[#1a1a1a] border-l border-[#2e2e2e]">
+        <div className="wrapper wrapper-right flex justify-center items-center not-lg:w-full w-[50%] h-auto py-15 px-12 bg-[#1a1a1a] border-l border-[#2e2e2e]">
           <form
             className="w-full"
             onSubmit={handleGeneratePlan}
