@@ -116,7 +116,7 @@ export default function Plan(){
         </div>
       : null}
 
-      <div className="flex flex-col p-12 max-w-6xl mx-auto h-full">
+      <div className="flex flex-col p-12 max-w-6xl mx-auto h-full overflow-scroll hidden-scrollbar">
         <div className="flex">
           <div className="flex max-w-[70%]">
             <h1 className="text-[56px] uppercase tracking-[1px] leading-none mb-4">
@@ -166,7 +166,7 @@ export default function Plan(){
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mt-10 pb-20 overflow-scroll hidden-scrollbar">
+        <div className="grid grid-cols-3 gap-4 mt-10 pb-20">
           {days.map((day, index) => (
             <div
               key={index}
