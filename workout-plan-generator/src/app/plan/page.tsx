@@ -130,10 +130,10 @@ export default function Plan(){
         </div>
       : null}
 
-      <div className="flex flex-col p-12 max-w-6xl mx-auto h-full overflow-scroll hidden-scrollbar">
+      <div className="flex flex-col p-12 mx-auto max-w-6xl w-full h-full overflow-scroll hidden-scrollbar">
         <div className="flex">
           <div className="flex max-w-[70%]">
-            <h1 className="text-[56px] uppercase tracking-[1px] leading-none mb-4">
+            <h1 className="not-lg:text-[13vw] text-[56px] uppercase tracking-[1px] leading-none mb-4">
               {plan?.title}
             </h1>
           </div>
@@ -162,7 +162,7 @@ export default function Plan(){
           </div>
         </div>
 
-        <div className="flex gap-5">
+        <div className="flex gap-5 flex-wrap">
           <div className="tag">
             {plan?.level}
           </div>
@@ -180,7 +180,7 @@ export default function Plan(){
           </div>
         </div>
 
-        <div className="lg:hidden flex items-end flex-1 justify-start gap-2 mt-4">
+        <div className="lg:hidden flex flex-wrap items-end flex-1 justify-start gap-2 mt-4">
           <button
             className="flex w-45 justify-center items-center max-h-11.75 gap-1 bg-transparent px-8 py-3 text-(--wpg-muted-text-color) text-[14px] font-medium border border-[#2e2e2e] cursor-pointer active:brightness-150"
             onClick={() => handleExportAsPDF()}
@@ -203,7 +203,7 @@ export default function Plan(){
 
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mt-10 pb-20">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mt-10 pb-20">
           {days.map((day, index) => (
             <div
               key={index}

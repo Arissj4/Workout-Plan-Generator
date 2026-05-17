@@ -64,7 +64,6 @@ export default function Landing(){
         localStorage.setItem("currentPlan", JSON.stringify(data.plan));
         router.push("/plan");
       }
-1
     } catch (error) {
       setError("Something went wrong, please try again later.");
     } finally {
@@ -245,12 +244,12 @@ export default function Landing(){
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`flex justify-center items-center not-lg:gap-1 gap-2 w-full bg-(--wpg-accent-color) text-black not-lg:text-[3vw] text-[22px]
+                className={`flex justify-center items-center not-lg:gap-1 gap-2 w-full bg-(--wpg-accent-color) text-black not-lg:text-[14px] text-[22px]
                 tracking-[2px] border p-4.5 mt-2 uppercase
                 ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
               >
                 {isLoading ? "GENERATING..." : "GENERATE MY PLAN"}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 not-lg:size-[3vw]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 not-lg:size-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                 </svg>
               </button>
