@@ -10,7 +10,7 @@ export default function PlanDialog({plan, closeDialog}: {plan: Plan; closeDialog
         className="fixed flex justify-center items-center top-1/2 left-1/2 -translate-1/2 z-auto bg-gray-900 w-full h-full opacity-70"
         onClick={closeDialog}
       />
-      <div className="fixed top-1/2 left-1/2 -translate-1/2 w-[50%] h-[60%] bg-gray-950 p-8 rounded-lg shadow-lg border border-(--wpg-border-color)">
+      <div className="fixed top-1/2 left-1/2 -translate-1/2 not-lg:w-[80%] lg:w-[50%] not-lg:h-[80%] lg:h-[60%] bg-gray-950 p-8 rounded-lg shadow-lg border border-(--wpg-border-color)">
         <div className="absolute text-3xl top-2 right-3.5 text-gray-500 hover:text-gray-300 cursor-pointer" onClick={closeDialog}>
           &times;
         </div>
@@ -18,7 +18,7 @@ export default function PlanDialog({plan, closeDialog}: {plan: Plan; closeDialog
           Workout Plan
         </h2>
         <div
-          className="grid grid-cols-2 gap-2 overflow-y-auto h-[calc(100%-4rem)] pr-2 hidden-scrollbar"
+          className="grid lg:grid-cols-2 md:grid-cols-1 gap-2 overflow-y-auto h-[calc(100%-4rem)] pr-2 hidden-scrollbar"
         >
           {days.map((day, index) => (
             <div

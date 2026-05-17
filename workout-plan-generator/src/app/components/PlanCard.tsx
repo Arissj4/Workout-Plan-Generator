@@ -14,7 +14,7 @@ export default function PlanCard({plan}: {plan: Plan}) {
 
      <div
         key={plan?.id}
-        className="flex flex-col justify-between border p-5 border-[#2e2e2e] bg-[#1a1a1a] hover:cursor-pointer"
+        className="flex flex-col max-w-full justify-between border p-5 border-[#2e2e2e] bg-[#1a1a1a] hover:cursor-pointer"
         onClick={() => {
           setSelectedPlan(plan);
         }}

@@ -74,7 +74,7 @@ export default async function Saved(){
 
   return (
     <div
-      className="flex flex-col p-12 max-w-6xl mx-auto overflow-scroll hidden-scrollbar"
+      className="flex flex-col w-full p-12 max-w-6xl mx-auto overflow-scroll hidden-scrollbar max-w-[800px]"
     >
       {plans.length === 0 && (
         <div
@@ -88,7 +88,7 @@ export default async function Saved(){
 
       {plans.length > 0 && (
         <div
-          className="grid gap-4 mt-10"
+          className="flex flex-col gap-4 mt-10 w-full"
         >
           {plans.map((plan: any) => (
             <PlanCard key={plan.id} plan={plan}/>
