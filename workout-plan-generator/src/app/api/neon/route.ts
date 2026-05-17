@@ -39,19 +39,13 @@ export async function POST(req: NextRequest) {
       ORDER BY created_at DESC
     `;
 
-    body.plan.days.forEach(async (day: Day) => {
-      await sql`INSERT INTO days (workout_id, day, focus) VALUES (${workouts[0].id}, ${day.day}, ${day.focus})`
-
-      const lastDay = await sql`
-        SELECT * FROM days
-        WHERE workout_id = ${workouts[0].id}
-        ORDER BY created_at DESC
-      `;
-
-      day.exercises.forEach(async (exercise: Exercise) => {
-        await sql`INSERT INTO exercises (days_id, name, sets, reps) VALUES (${lastDay[0].id}, ${exercise.name}, ${exercise.sets}, ${exercise.reps})`
-      });
-    });
+    await Promise.all(body.plan.days.map(async (day: Day) => {
+      const insertedDayResult = await sql`INSERT INTO days (workout_id, day, focus) VALUES (${workouts[0].id}, ${day.day}, ${day.focus}) RETURNING id`;
+      const insertedDayId = insertedDayResult[0].id;
+      await Promise.all(day.exercises.map(async (exercise: Exercise) => {
+        await sql`INSERT INTO exercises (days_id, name, sets, reps) VALUES (${insertedDayId}, ${exercise.name}, ${exercise.sets}, ${exercise.reps})`
+      }));
+    }));
 
     return NextResponse.json(
       {
