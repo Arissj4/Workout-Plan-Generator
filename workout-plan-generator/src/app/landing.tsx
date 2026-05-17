@@ -82,14 +82,16 @@ export default function Landing(){
       : null}
 
       <div className="wrapper flex flex-1 h-full not-lg:flex-col">
-        <div  className="wrapper wrapper-left flex flex-col justify-center py-15 px-12 min-w-[50%]">
+        <div  className="wrapper wrapper-left flex flex-col justify-center py-15 px-12 not-lg:w-full min-w-[50%]">
           <div className="wrapper-left--tag text-(--wpg-main-text-color) text-[11px] mb-6 tracking-[3px]">
             AI-POWERED TRAINING
           </div>
 
           <div className="wrapper-left--title text-[88px] leading-[0.92] mb-7 uppercase">
-            <h1>
-              build your
+            <h1 className="not-lg:text-[13vw]">
+              build
+              <br/>
+              your
               <br/>
               <span className="text-(--wpg-main-text-color)">perfect</span>
               <br/>

@@ -15,15 +15,15 @@ export default function SignIn( {provider}: {provider: string} ) { // This compo
 
   return (
     <>
-      <div className="flex min-h-screen">
+      <div className="flex h-full not-lg:flex-col overflow-scroll hidden-scrollbar">
 
         <div
-          className="w-1/2 bg-[#0e0e0e] p-14 flex flex-col justify-center"
+          className="w-1/2 bg-[#0e0e0e] p-14 flex flex-col justify-center not-lg:w-full"
         >
           <div>
 
-            <h1 className="text-[64px] leading-[0.92] uppercase text-white">
-              <span className="text-(--wpg-main-text-color) text-[64px] block">
+            <h1 className="not-lg:text-[13vw] text-[64px] leading-[0.92] uppercase text-white">
+              <span className="text-(--wpg-main-text-color) not-lg:text-[13vw] text-[64px] block">
                 WPG
               </span>
 
@@ -40,7 +40,7 @@ export default function SignIn( {provider}: {provider: string} ) { // This compo
         </div>
 
         <div
-          className="w-1/2 bg-[#1a1a1a] border-l border-[#2e2e2e] p-14 flex flex-col justify-center"
+          className="not-lg:w-full w-1/2 bg-[#1a1a1a] border-l border-[#2e2e2e] p-14 flex flex-col justify-center"
         >
           <h2 className="text-[32px] tracking-[1px] text-white mb-1.5">
             Welcome back
