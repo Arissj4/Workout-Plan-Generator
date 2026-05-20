@@ -38,7 +38,7 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col">
         <SessionWrapper session={session}>
           <Header session={session}/>
-          <main>
+          <main className="flex-1">
             {children}
           </main>
         </SessionWrapper>
