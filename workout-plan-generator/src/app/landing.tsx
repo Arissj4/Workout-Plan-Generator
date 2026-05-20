@@ -164,13 +164,13 @@ export default function Landing(){
                     onChange={ (e) => setDays(parseInt(e.target.value))}
                     defaultValue={1}
                   >
-                    <option value="1" className="bg-[#242424]">1 day</option>
-                    <option value="2" className="bg-[#242424]">2 days</option>
-                    <option value="3" className="bg-[#242424]">3 days</option>
-                    <option value="4" className="bg-[#242424]">4 days</option>
-                    <option value="5" className="bg-[#242424]">5 days</option>
-                    <option value="6" className="bg-[#242424]">6 days</option>
-                    <option value="7" className="bg-[#242424]">7 days</option>
+                    <option label="1" value="1" className="bg-[#242424]">1 day</option>
+                    <option label="2" value="2" className="bg-[#242424]">2 days</option>
+                    <option label="3" value="3" className="bg-[#242424]">3 days</option>
+                    <option label="4" value="4" className="bg-[#242424]">4 days</option>
+                    <option label="5" value="5" className="bg-[#242424]">5 days</option>
+                    <option label="6" value="6" className="bg-[#242424]">6 days</option>
+                    <option label="7" value="7" className="bg-[#242424]">7 days</option>
                   </select>
                 </div>
               </div>
@@ -184,10 +184,10 @@ export default function Landing(){
                     onChange={ (e) => setLength(parseInt(e.target.value))}
                     defaultValue={30}
                   >
-                    <option value="30" className="bg-[#242424]">30 min</option>
-                    <option value="45" className="bg-[#242424]">45 min</option>
-                    <option value="60" className="bg-[#242424]">60 min</option>
-                    <option value="90" className="bg-[#242424]">90 min</option>
+                    <option label="30 min" value="30" className="bg-[#242424]">30 min</option>
+                    <option label="45 min" value="45" className="bg-[#242424]">45 min</option>
+                    <option label="60 min" value="60" className="bg-[#242424]">60 min</option>
+                    <option label="90 min" value="90" className="bg-[#242424]">90 min</option>
                   </select>
                 </div>
               </div>

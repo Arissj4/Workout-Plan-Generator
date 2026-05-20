@@ -11,10 +11,10 @@ export default function Plan(){
 
   const {data: session, status} = useSession();
 
-  const [isDownloading, setIsDownloading] = useState<Boolean>(false);
-  const [isSaving, setIsSaving] = useState<Boolean>(false);
-  const [successfulSave, setSuccessfulSave] = useState<Boolean>(false);
-  const [failedSave, setFailedSave] = useState<Boolean>(false);
+  const [isDownloading, setIsDownloading] = useState<boolean>(false);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [successfulSave, setSuccessfulSave] = useState<boolean>(false);
+  const [failedSave, setFailedSave] = useState<boolean>(false);
 
   const [plan, setPlan] = useState<Plan | null>(null);
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
