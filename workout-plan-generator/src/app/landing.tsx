@@ -163,6 +163,7 @@ export default function Landing(){
                     className="w-full bg-(--wpg-card-color) border border-(--wpg-border-color) text-white px-4 py-3 text-[14px] font-light outline-0"
                     onChange={ (e) => setDays(parseInt(e.target.value))}
                     defaultValue={1}
+                    aria-label="Select number of days"
                   >
                     <option label="1" value="1" className="bg-[#242424]">1 day</option>
                     <option label="2" value="2" className="bg-[#242424]">2 days</option>
@@ -183,6 +184,7 @@ export default function Landing(){
                     className="w-full bg-(--wpg-card-color) border border-(--wpg-border-color) text-white px-4 py-3 text-[14px] font-light outline-0"
                     onChange={ (e) => setLength(parseInt(e.target.value))}
                     defaultValue={30}
+                    aria-label="Select session length"
                   >
                     <option label="30 min" value="30" className="bg-[#242424]">30 min</option>
                     <option label="45 min" value="45" className="bg-[#242424]">45 min</option>

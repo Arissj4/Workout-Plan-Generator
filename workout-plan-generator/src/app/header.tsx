@@ -14,12 +14,13 @@ type Props = {
 export default function Header(props: Props) {
   const { session } = props;
   const router = useRouter();
-  const [showDropDown, setShowDropDown] = useState<Boolean>(false);
-  const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
 
   return(
     <>
+    <header>
       <nav
         className="flex flex-col w-full items-center justify-between lg:py-5 pt-5 font-sans tracking-[2px] border-b border-[#2e2e2e]"
       >
@@ -185,6 +186,7 @@ export default function Header(props: Props) {
           </div>
         </div>
       </nav>
+    </header>
     </>
   )
 }
