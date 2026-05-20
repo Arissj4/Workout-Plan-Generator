@@ -142,6 +142,7 @@ export default function Plan(){
             <button
               className="flex w-45 justify-center items-center max-h-11.75 gap-1 bg-transparent px-8 py-3 text-(--wpg-muted-text-color) text-[14px] font-medium border border-[#2e2e2e] cursor-pointer active:brightness-150"
               onClick={() => handleExportAsPDF()}
+              aria-label="Export my plan to PDF"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
@@ -153,6 +154,7 @@ export default function Plan(){
               <button
                 className="w-45 max-h-11.75 bg-(--wpg-main-text-color) px-8 py-3 mt-2 text-black text-[14px] font-medium hover:cursor-pointer active:bg-(--wpg-disabled-color)"
                 onClick={() => handleSavePlan()}
+                aria-label="Save my plan in my plans"
               >
                 Save Plan
               </button>
@@ -184,6 +186,7 @@ export default function Plan(){
           <button
             className="flex w-45 justify-center items-center max-h-11.75 gap-1 bg-transparent px-8 py-3 text-(--wpg-muted-text-color) text-[14px] font-medium border border-[#2e2e2e] cursor-pointer active:brightness-150"
             onClick={() => handleExportAsPDF()}
+            aria-label="Export my plan to PDF"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
@@ -195,6 +198,7 @@ export default function Plan(){
             <button
               className="w-45 max-h-11.75 bg-(--wpg-main-text-color) px-8 py-3 mt-2 text-black text-[14px] font-medium hover:cursor-pointer active:bg-(--wpg-disabled-color)"
               onClick={() => handleSavePlan()}
+              aria-label="Save my plan in my plans"
             >
               Save Plan
             </button>

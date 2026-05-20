@@ -144,6 +144,7 @@ export default function Landing(){
                       className={`text-[13px] cursor-pointer border px-4 py-2 ${selectedGoal === index ? "text-(--wpg-accent-color) border-(--wpg-accent-color) bg-[rgba(232,255,71,.06)]" : "text-(--wpg-muted-text-color) border-(--wpg-border-color)"}`}
                       onClick={() => setGoal(index)}
                       type="button"
+                      aria-label={goal}
                     >
                       {goal}
                     </button>
@@ -204,6 +205,7 @@ export default function Landing(){
                       className={`text-[13px] cursor-pointer border px-4 py-2 ${selectedLevel === index ? "text-(--wpg-accent-color) border-(--wpg-accent-color) bg-[rgba(232,255,71,.06)]" : "text-(--wpg-muted-text-color) border-(--wpg-border-color)"}`}
                       onClick={() => setLevel(index)}
                       type="button"
+                      aria-label={level}
                     >
                       {level}
                     </button>
@@ -231,6 +233,7 @@ export default function Landing(){
                         }
                       }}
                       type="button"
+                      aria-label={equipment}
                     >
                       {equipment}
                     </button>
@@ -245,8 +248,9 @@ export default function Landing(){
                 type="submit"
                 disabled={isLoading}
                 className={`flex justify-center items-center not-lg:gap-1 gap-2 w-full bg-(--wpg-accent-color) text-black not-lg:text-[14px] text-[22px]
-                tracking-[2px] border p-4.5 mt-2 uppercase
+                tracking-[2px] border p-4.5 mt-2 uppercase aria-label="Generate my plan button"
                 ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                aria-label="Generate my plan button"
               >
                 {isLoading ? "GENERATING..." : "GENERATE MY PLAN"}
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 not-lg:size-4">

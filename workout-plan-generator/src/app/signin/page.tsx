@@ -53,6 +53,7 @@ export default function SignIn( {provider}: {provider: string} ) { // This compo
           <button
             onClick={() => signIn("google", { callbackUrl: "/" })}
             className="w-full bg-[#f5f2ee] flex items-center justify-center gap-2.5 py-3.5 cursor-pointer hover:opacity-90 transition-opacity"
+            aria-label="Continue with Google"
           >
             <span className="text-[14px] font-medium text-black">
               Continue with Google

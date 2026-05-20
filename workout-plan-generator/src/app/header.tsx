@@ -27,6 +27,7 @@ export default function Header(props: Props) {
           <button
             className="w-30 text-(--wpg-main-text-color) text-[28px] font-bold hover:cursor-pointer"
             onClick={() => router.push("/")}
+            aria-label="Workout Plan Generator"
           >
             WPG
           </button>
@@ -84,6 +85,7 @@ export default function Header(props: Props) {
                       className="w-full text-left bg-transparent px-4 py-2 text-(--wpg-main-text-color) hover:text-white hover:bg-[#2e2e2e] rounded-sm text-[13px] transition-colors cursor-pointer"
                       type="button"
                       onClick={async () => await signOut()}
+                      aria-label="Sign out button"
                     >
                       Sign out
                     </button>
@@ -95,6 +97,7 @@ export default function Header(props: Props) {
                 className="bg-(--wpg-main-text-color) px-5 py-2 text-black text-[13px] hover:cursor-pointer"
                 type="button"
                 onClick={() => {router.push("/signin")}}
+                aria-label="Sign in button"
               >
                 Sign in
               </button>
@@ -165,6 +168,7 @@ export default function Header(props: Props) {
                   className="w-full text-center bg-transparent px-4 py-2 text-[14px] text-(--wpg-main-text-color) border border-(--wpg-border-color) hover:text-white hover:bg-[#2e2e2e] rounded-sm transition-colors cursor-pointer"
                   type="button"
                   onClick={async () => {await signOut(); setIsOpen(false)}}
+                  aria-label="Sign out button"
                 >
                   Sign out
                 </button>
@@ -173,6 +177,7 @@ export default function Header(props: Props) {
               <button
                 onClick={() => {router.push("/signin"); setIsOpen(false)}}
                 className="w-full bg-(--wpg-main-text-color) text-[14px] py-3 text-black tracking-[2px] cursor-pointer uppercase"
+                aria-label="Sign in button"
               >
                 Sign in
               </button>

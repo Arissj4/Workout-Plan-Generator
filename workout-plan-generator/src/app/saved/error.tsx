@@ -9,6 +9,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
       <button
         className="bg-transparent text-[14px] border border-(--wpg-border-color) px-8 py-3 hover:cursor-pointer"
         onClick={() => reset()}
+        aria-label="Try again"
       >
         Try again
       </button>
