@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import SessionWrapper from "@/app/components/SessionWrapper";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { Analytics } from "@vercel/analytics/next";
 
 
 
@@ -42,6 +43,7 @@ export default async function RootLayout({
             {children}
           </main>
         </SessionWrapper>
+        <Analytics />
       </body>
     </html>
   );
