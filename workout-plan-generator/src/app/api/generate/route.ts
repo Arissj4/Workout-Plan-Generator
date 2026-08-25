@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const { goal, days, length, level, equipment } = await req.json();
 
     const message = await client.chat.completions.create({
-      model: "llama-3.1-8b-instant",
+      model: "GPT OSS 120B",
       max_tokens: 1024,
       messages: [
         {
