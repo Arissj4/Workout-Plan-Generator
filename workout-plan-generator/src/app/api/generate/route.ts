@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const { goal, days, length, level, equipment } = await req.json();
 
     const message = await client.chat.completions.create({
-      model: "GPT OSS 120B",
+      model: "openai/gpt-oss-120b",
       max_tokens: 1024,
       messages: [
         {
