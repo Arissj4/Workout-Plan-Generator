@@ -1,9 +1,36 @@
 import Groq from "groq-sdk";
 import { NextRequest, NextResponse } from "next/server"
+import * as zod from "zod";
 
 const client = new Groq({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
+
+const responseSchema = zod.object(
+  {
+    id: zod.string(),
+    title: zod.string(),
+    level: zod.string(),
+    time: zod.string(),
+    equipment: zod.string().array(),
+    goal: zod.string(),
+    days: zod.array(zod.object(
+      {
+        day: zod.string(),
+        focus: zod.string(),
+        exercises: zod.array(zod.object(
+          {
+            name: zod.string(),
+            sets: zod.number(),
+            reps: zod.number(),
+          }
+        ))
+      }
+    ))
+  }
+);
+
+type resSchema = zod.infer<typeof responseSchema>;
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,7 +72,8 @@ export async function POST(req: NextRequest) {
 
     const raw = message.choices[0].message.content ?? "";
     const cleaned = raw.replace(/```json|```/g, "").trim();
-    const plan = JSON.parse(cleaned);
+    const jsonVersion = await JSON.parse(cleaned);
+    const plan: resSchema = await responseSchema.parseAsync(jsonVersion);
 
     return NextResponse.json({ plan });
 
