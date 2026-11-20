@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
 
     const message = await client.chat.completions.create({
       model: "openai/gpt-oss-120b",
-      max_tokens: 1024,
+      max_tokens: 4096,
       messages: [
         {
           role: "user",
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
               "id": "Plan ID",
               "title": "Plan name",
               "level": "Fitness level",
-              "time": "Session length in minutes",
+              "time": "Session length in minutes, in string",
               "equipment": ["Equipment"],
               "goal": "Workout goal",
               "days": [
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
                   "day": "Monday",
                   "focus": "Push",
                   "exercises": [
-                    { "name": "Bench Press", "sets": 4, "reps": 8 }
+                    { "name": "Bench Press", "sets": in number, "reps": in number }
                   ]
                 }
               ]
