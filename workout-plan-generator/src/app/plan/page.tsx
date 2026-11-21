@@ -230,12 +230,16 @@ export default function Plan(){
                 plan?.days.find(d => day === d.day)?.exercises.map((ex, i) => (
                   <div
                     key={i}
-                    className="flex justify-between items-center py-2 border-b border-[#2e2e2e] last:border-0 text-[13px]"
+                    className="flex wrap-anywhere justify-between items-center py-2 border-b border-[#2e2e2e] last:border-0 text-[13px]"
                   >
-                    <span className="text-white">{ex.name}</span>
-                    <span className="text-(--wpg-muted-text-color)">
-                      {ex.sets} × {ex.reps}
-                    </span>
+                    <div>
+                      <span className="text-white">{ex.name}</span>
+                    </div>
+                    <div className="min-w-fit ml-2">
+                      <span className="text-(--wpg-muted-text-color)">
+                        {ex.sets} × {ex.reps}
+                      </span>
+                    </div>
                   </div>
                 ))
                 : (
