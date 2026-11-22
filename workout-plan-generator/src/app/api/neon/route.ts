@@ -4,7 +4,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import type { Day, Exercise } from "@/app/lib/costumeTypes";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     if (!session)

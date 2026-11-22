@@ -5,6 +5,7 @@ import { signOut } from "next-auth/react";
 import { useState } from "react";
 import userIcon from "@/../public/default-user-icon.svg";
 import type { Session } from "next-auth";
+import Image from "next/image";
 
 type Props = {
   session: Session | null;
@@ -60,14 +61,14 @@ export default function Header(props: Props) {
                     className="relative w-10 h-10 border-2 border-(--wpg-main-text-color) rounded-full hover:cursor-pointer hover:opacity-80 transition-opacity"
                     onClick={() => setShowDropDown(!showDropDown)}
                   >
-                    <img
+                    <Image
                       className="rounded-full"
                       src={session.user?.image || userIcon.src}
                       alt="User Icon"
                       referrerPolicy="no-referrer"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
-                        e.currentTarget.src === userIcon.src;
+                        e.currentTarget.src = userIcon.src;
                       }}
                     />
                   </div>
@@ -123,7 +124,7 @@ export default function Header(props: Props) {
 
           <div
             className={`min-[1000px]:hidden mt-5 overflow-hidden transition-all duration-300 bg-[#141414]
-          ${isOpen ? "max-h-[400px] border-t border-[#2e2e2e]" : "max-h-0"} w-full`}
+          ${isOpen ? "max-h-100 border-t border-[#2e2e2e]" : "max-h-0"} w-full`}
           >
             {/* Nav links */}
             <div className="flex flex-col">
@@ -157,9 +158,10 @@ export default function Header(props: Props) {
               {session ? (
                 <>
                   <div className="flex items-center gap-3 mb-4">
-                    <img
-                      src={session.user?.image!}
+                    <Image
+                      src={session.user?.image || "Image"}
                       className="w-8 h-8 rounded-full"
+                      alt="User Icon"
                     />
                     <div>
                       <div className="text-[13px] text-white">
