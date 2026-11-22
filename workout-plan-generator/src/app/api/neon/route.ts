@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import type { Day, Exercise, Plan } from "@/app/lib/costumeTypes";
+import type { Day, Exercise } from "@/app/lib/costumeTypes";
 
 export async function GET(req: NextRequest) {
   try {
