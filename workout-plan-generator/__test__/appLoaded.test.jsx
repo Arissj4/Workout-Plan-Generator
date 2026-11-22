@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Home from "../src/app/page";
 
-
-jest.mock('next/navigation', () => ({
+jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
     replace: jest.fn(),
@@ -13,14 +12,12 @@ jest.mock('next/navigation', () => ({
   }),
 }));
 
+describe("Page", () => {
+  it("renders a heading", () => {
+    const res = render(<Home />);
 
-describe('Page', () => {
-  it('renders a heading', () => {
-    const res = render(<Home />)
+    const landing = res.container.querySelector("#find-test");
 
-    const landing = res.container.querySelector('#find-test')
-
-    expect(landing).toBeInTheDocument()
-
-  })
-})
+    expect(landing).toBeInTheDocument();
+  });
+});

@@ -2,36 +2,38 @@ import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import type { Day, Exercise, Plan } from "@/app/lib/costumeTypes"
+import type { Day, Exercise, Plan } from "@/app/lib/costumeTypes";
 
 export async function GET(req: NextRequest) {
-  try{
+  try {
     const session = await getServerSession(authOptions);
-    if (!session) return NextResponse.json({error: "Unauthorized"}, {status: 401});
+    if (!session)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const sql = neon(process.env.postgres_wpg_db_POSTGRES_URL!);
-    const response = await sql`SELECT * FROM workouts WHERE user_email = ${session.user?.email}`;
+    const response =
+      await sql`SELECT * FROM workouts WHERE user_email = ${session.user?.email}`;
     return NextResponse.json(response);
-
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
       { error: "Failed to generate plan", details: String(error) },
-      { status: 500 }
-    )
+      { status: 500 },
+    );
   }
 }
 
 export async function POST(req: NextRequest) {
-  try{
+  try {
     const body = await req.json();
     const session = await getServerSession(authOptions);
-    if(!session) return NextResponse.json({error: "Unauthorized"}, {status: 401});
+    if (!session)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const equipments = body.plan.equipment.join(", ");
 
-    const sql = neon(process.env.postgres_wpg_db_POSTGRES_URL!)
-    await sql`INSERT INTO workouts (title, time, level, goal, equipment, user_email) VALUES (${body.plan.title}, ${body.plan.time}, ${body.plan.level}, ${body.plan.goal}, ${equipments}, ${session?.user?.email})`
+    const sql = neon(process.env.postgres_wpg_db_POSTGRES_URL!);
+    await sql`INSERT INTO workouts (title, time, level, goal, equipment, user_email) VALUES (${body.plan.title}, ${body.plan.time}, ${body.plan.level}, ${body.plan.goal}, ${equipments}, ${session?.user?.email})`;
 
     const workouts = await sql`
       SELECT * FROM workouts
@@ -39,24 +41,30 @@ export async function POST(req: NextRequest) {
       ORDER BY created_at DESC
     `;
 
-    await Promise.all(body.plan.days.map(async (day: Day) => {
-      const insertedDayResult = await sql`INSERT INTO days (workout_id, day, focus) VALUES (${workouts[0].id}, ${day.day}, ${day.focus}) RETURNING id`;
-      const insertedDayId = insertedDayResult[0].id;
-      await Promise.all(day.exercises.map(async (exercise: Exercise) => {
-        await sql`INSERT INTO exercises (days_id, name, sets, reps) VALUES (${insertedDayId}, ${exercise.name}, ${exercise.sets}, ${exercise.reps})`
-      }));
-    }));
+    await Promise.all(
+      body.plan.days.map(async (day: Day) => {
+        const insertedDayResult =
+          await sql`INSERT INTO days (workout_id, day, focus) VALUES (${workouts[0].id}, ${day.day}, ${day.focus}) RETURNING id`;
+        const insertedDayId = insertedDayResult[0].id;
+        await Promise.all(
+          day.exercises.map(async (exercise: Exercise) => {
+            await sql`INSERT INTO exercises (days_id, name, sets, reps) VALUES (${insertedDayId}, ${exercise.name}, ${exercise.sets}, ${exercise.reps})`;
+          }),
+        );
+      }),
+    );
 
     return NextResponse.json(
       {
         message: "Plan saved successfully",
-        success: true
+        success: true,
       },
-      { status: 200 });
+      { status: 200 },
+    );
   } catch (error) {
     return NextResponse.json(
-      {error: "Failed to save the plan", details: String(error)},
-      {status: 500}
-    )
+      { error: "Failed to save the plan", details: String(error) },
+      { status: 500 },
+    );
   }
 }

@@ -8,8 +8,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { Analytics } from "@vercel/analytics/next";
 
-
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -38,10 +36,8 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <SessionWrapper session={session}>
-          <Header session={session}/>
-          <main className="flex-1">
-            {children}
-          </main>
+          <Header session={session} />
+          <main className="flex-1">{children}</main>
         </SessionWrapper>
         <Analytics />
       </body>

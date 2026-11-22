@@ -1,8 +1,8 @@
 type Exercise = {
-  name: string,
-  sets: number,
-  reps: number,
-}
+  name: string;
+  sets: number;
+  reps: number;
+};
 
 type Day = {
   day: string;
@@ -22,11 +22,11 @@ type Plan = {
 };
 
 type User = {
-  name: string,
-  email: string,
-  image: string,
-}
+  name: string;
+  email: string;
+  image: string;
+};
 
 type SavedPlan = Omit<Plan, "days"> & { days: number };
 
-export type {Exercise, Day, Plan, User, SavedPlan};
+export type { Exercise, Day, Plan, User, SavedPlan };

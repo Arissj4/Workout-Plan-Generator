@@ -1,15 +1,14 @@
-"use client"
+"use client";
 
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { jsPDF } from "jspdf";
 import { useSession } from "next-auth/react";
-import type {Exercise, Day, Plan} from "@/app/lib/costumeTypes";
+import type { Exercise, Day, Plan } from "@/app/lib/costumeTypes";
 import MessageComponent from "../components/MessageComponent";
 
-export default function Plan(){
-
-  const {data: session, status} = useSession();
+export default function Plan() {
+  const { data: session, status } = useSession();
 
   const [isDownloading, setIsDownloading] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -17,7 +16,15 @@ export default function Plan(){
   const [failedSave, setFailedSave] = useState<boolean>(false);
 
   const [plan, setPlan] = useState<Plan | null>(null);
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
 
   useEffect(() => {
     const stored = localStorage.getItem("currentPlan");
@@ -25,7 +32,7 @@ export default function Plan(){
   }, []);
 
   const handleExportAsPDF = () => {
-    try{
+    try {
       setIsDownloading(true);
       const doc = new jsPDF();
 
@@ -52,15 +59,15 @@ export default function Plan(){
 
       plan?.days.forEach((dayPlan, index) => {
         if (!dayPlan.isRest) {
-          doc.text(
-            `${dayPlan.day} - ${dayPlan.focus}`,
-            20,
-            y
-        );
+          doc.text(`${dayPlan.day} - ${dayPlan.focus}`, 20, y);
 
-        y += 10;
+          y += 10;
           dayPlan.exercises.forEach((exercise, exIndex) => {
-            doc.text(`  ${exIndex + 1}. ${exercise.name} - ${exercise.sets}x${exercise.reps}`, 20, y);
+            doc.text(
+              `  ${exIndex + 1}. ${exercise.name} - ${exercise.sets}x${exercise.reps}`,
+              20,
+              y,
+            );
             y += 7;
           });
           y += 5; // Add some space after each day's exercises
@@ -68,16 +75,16 @@ export default function Plan(){
       });
 
       doc.save("workouts.pdf");
-    } catch (error){
+    } catch (error) {
       console.log(error);
     } finally {
       setIsDownloading(false);
     }
-  }
+  };
 
   const handleSavePlan = async () => {
-    try{
-      if(!session){
+    try {
+      if (!session) {
         alert("You must be logged in to save a plan.");
         return;
       }
@@ -89,46 +96,63 @@ export default function Plan(){
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({plan, user_email: session?.user?.email})
-      })
+        body: JSON.stringify({ plan, user_email: session?.user?.email }),
+      });
 
       const data = await res.json();
-      if(data.success){
+      if (data.success) {
         setSuccessfulSave(true);
       } else {
         setFailedSave(true);
       }
-    } catch (error){
+    } catch (error) {
       setFailedSave(true);
     } finally {
       setIsSaving(false);
-      const delay = () => new Promise(res => setTimeout(res, 2000));
+      const delay = () => new Promise((res) => setTimeout(res, 2000));
       await delay();
       setSuccessfulSave(false);
       setFailedSave(false);
     }
-  }
+  };
 
-  if (!plan) return <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">Loading plan...</div>;
-  if (isSaving) return <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">Saving plan...</div>
+  if (!plan)
+    return (
+      <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">
+        Loading plan...
+      </div>
+    );
+  if (isSaving)
+    return (
+      <div className="flex flex-1 p-12 text-white items-center justify-center text-4xl animate-pulse">
+        Saving plan...
+      </div>
+    );
 
   return (
-
     <>
-      {successfulSave ?
-        <MessageComponent message={"Plan saved successfully!"} duration={2000} type="success"/>
-      : null}
+      {successfulSave ? (
+        <MessageComponent
+          message={"Plan saved successfully!"}
+          duration={2000}
+          type="success"
+        />
+      ) : null}
 
-      {failedSave ?
-        <MessageComponent message={"Failed to save plan!"} duration={2000} type="error"/>
-      : null}
+      {failedSave ? (
+        <MessageComponent
+          message={"Failed to save plan!"}
+          duration={2000}
+          type="error"
+        />
+      ) : null}
 
-      {isDownloading ?
+      {isDownloading ? (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 text-white text-3xl animate-pulse flex-col gap-4 text-center ">
           <div className="loader"></div>
           Preparing your plan for download...
         </div>
-      : null}
+      ) : null}
 
       <div className="flex flex-col p-12 mx-auto max-w-6xl w-full h-full overflow-scroll hidden-scrollbar">
         <div className="flex">
@@ -144,13 +168,24 @@ export default function Plan(){
               onClick={() => handleExportAsPDF()}
               aria-label="Export my plan to PDF"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-3.5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
+                />
               </svg>
               Export as PDF
             </button>
 
-            {session?.user?.email ?
+            {session?.user?.email ? (
               <button
                 className="w-45 max-h-11.75 bg-(--wpg-main-text-color) px-8 py-3 mt-2 text-black text-[14px] font-medium hover:cursor-pointer active:bg-(--wpg-disabled-color)"
                 onClick={() => handleSavePlan()}
@@ -158,28 +193,20 @@ export default function Plan(){
               >
                 Save Plan
               </button>
-            : null
-            }
-
+            ) : null}
           </div>
         </div>
 
         <div className="flex gap-5 flex-wrap">
-          <div className="tag">
-            {plan?.level}
-          </div>
+          <div className="tag">{plan?.level}</div>
 
           <div className="tag">
             {`${plan?.days.length} ${plan?.days.length === 1 ? "day" : "days"} / week`}
           </div>
 
-          <div className="tag">
-            {`${plan?.time} min`}
-          </div>
+          <div className="tag">{`${plan?.time} min`}</div>
 
-          <div className="tag">
-            {plan?.equipment.join(" + ")}
-          </div>
+          <div className="tag">{plan?.equipment.join(" + ")}</div>
         </div>
 
         <div className="lg:hidden flex flex-wrap items-end flex-1 justify-start gap-2 mt-4">
@@ -188,13 +215,24 @@ export default function Plan(){
             onClick={() => handleExportAsPDF()}
             aria-label="Export my plan to PDF"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-3.5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
+              />
             </svg>
             Export as PDF
           </button>
 
-          {session?.user?.email ?
+          {session?.user?.email ? (
             <button
               className="w-45 max-h-11.75 bg-(--wpg-main-text-color) px-8 py-3 mt-2 text-black text-[14px] font-medium hover:cursor-pointer active:bg-(--wpg-disabled-color)"
               onClick={() => handleSavePlan()}
@@ -202,9 +240,7 @@ export default function Plan(){
             >
               Save Plan
             </button>
-          : null
-          }
-
+          ) : null}
         </div>
 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mt-10 pb-20">
@@ -212,42 +248,40 @@ export default function Plan(){
             <div
               key={index}
               className={`border p-5 ${
-                plan?.days.find(d => day === d.day)
+                plan?.days.find((d) => day === d.day)
                   ? "border-[#2e2e2e] bg-[#1a1a1a]"
                   : "border-dashed border-[#2e2e2e] flex justify-center items-center"
               }`}
             >
-              {plan?.days.find(d => day === d.day) ?
-              (
+              {plan?.days.find((d) => day === d.day) ? (
                 <div className="text-[22px] uppercase tracking-[1px] text-(--wpg-accent-color) mb-3">
-                  {day} — {plan?.days.find(d => day === d.day)?.focus}
+                  {day} — {plan?.days.find((d) => day === d.day)?.focus}
                 </div>
-              )
-              : null
-              }
+              ) : null}
 
-              {plan?.days.find(d => day === d.day) ?
-                plan?.days.find(d => day === d.day)?.exercises.map((ex, i) => (
-                  <div
-                    key={i}
-                    className="flex wrap-anywhere justify-between items-center py-2 border-b border-[#2e2e2e] last:border-0 text-[13px]"
-                  >
-                    <div>
-                      <span className="text-white">{ex.name}</span>
+              {plan?.days.find((d) => day === d.day) ? (
+                plan?.days
+                  .find((d) => day === d.day)
+                  ?.exercises.map((ex, i) => (
+                    <div
+                      key={i}
+                      className="flex wrap-anywhere justify-between items-center py-2 border-b border-[#2e2e2e] last:border-0 text-[13px]"
+                    >
+                      <div>
+                        <span className="text-white">{ex.name}</span>
+                      </div>
+                      <div className="min-w-fit ml-2">
+                        <span className="text-(--wpg-muted-text-color)">
+                          {ex.sets} × {ex.reps}
+                        </span>
+                      </div>
                     </div>
-                    <div className="min-w-fit ml-2">
-                      <span className="text-(--wpg-muted-text-color)">
-                        {ex.sets} × {ex.reps}
-                      </span>
-                    </div>
-                  </div>
-                ))
-                : (
-                  <div className="text-[#2e2e2e] text-[13px] tracking-[2px] uppercase text-center py-4">
-                    {day} - Rest
-                  </div>
-                )
-              }
+                  ))
+              ) : (
+                <div className="text-[#2e2e2e] text-[13px] tracking-[2px] uppercase text-center py-4">
+                  {day} - Rest
+                </div>
+              )}
             </div>
           ))}
         </div>

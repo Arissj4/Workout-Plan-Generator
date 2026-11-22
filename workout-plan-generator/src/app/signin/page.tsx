@@ -1,8 +1,9 @@
-"use client"
-import { signIn } from "next-auth/react"
+"use client";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function SignIn( {provider}: {provider: string} ) { // This component is likely intended to be a client component if it's handling form submissions directly.
+export default function SignIn({ provider }: { provider: string }) {
+  // This component is likely intended to be a client component if it's handling form submissions directly.
 
   const router = useRouter();
 
@@ -11,37 +12,32 @@ export default function SignIn( {provider}: {provider: string} ) { // This compo
     if (res?.ok) {
       router.push("/");
     }
-  }
+  };
 
   return (
     <>
       <div className="flex flex-1 h-full not-lg:flex-col overflow-scroll hidden-scrollbar">
-
-        <div
-          className="w-1/2 bg-[#0e0e0e] p-14 flex flex-col justify-center not-lg:w-full"
-        >
+        <div className="w-1/2 bg-[#0e0e0e] p-14 flex flex-col justify-center not-lg:w-full">
           <div>
-
             <h1 className="not-lg:text-[13vw] text-[64px] leading-[0.92] uppercase text-white">
               <span className="text-(--wpg-main-text-color) not-lg:text-[13vw] text-[64px] block">
                 WPG
               </span>
-
-              Your<br/>
-
+              Your
+              <br />
               <span className="text-(--wpg-accent-color) block">Perfect</span>
-
-              Program<br/>Awaits
+              Program
+              <br />
+              Awaits
             </h1>
             <p className="text-[13px] text-(--wpg-muted-text-color) mt-4 max-w-[280px] leading-[1.7]">
-              Sign in to generate, save, and revisit your AI-powered workout plans anytime.
+              Sign in to generate, save, and revisit your AI-powered workout
+              plans anytime.
             </p>
           </div>
         </div>
 
-        <div
-          className="not-lg:w-full w-1/2 bg-[#1a1a1a] border-l border-[#2e2e2e] p-14 flex flex-col justify-center"
-        >
+        <div className="not-lg:w-full w-1/2 bg-[#1a1a1a] border-l border-[#2e2e2e] p-14 flex flex-col justify-center">
           <h2 className="text-[32px] tracking-[1px] text-white mb-1.5">
             Welcome back
           </h2>
@@ -86,8 +82,7 @@ export default function SignIn( {provider}: {provider: string} ) { // This compo
             By continuing you agree to our Terms of Service and Privacy Policy
           </p>
         </div>
-
       </div>
     </>
-  )
+  );
 }

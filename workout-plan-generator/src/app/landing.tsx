@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -8,18 +8,28 @@ type PlanPayload = {
   length: number;
   level: string;
   equipment: string[];
-}
+};
 
-export default function Landing(){
-
+export default function Landing() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
 
-  const goals: Array<string> = ["Build muscle", "Lost fat", "Improve endurance", "Stay active"];
+  const goals: Array<string> = [
+    "Build muscle",
+    "Lost fat",
+    "Improve endurance",
+    "Stay active",
+  ];
   const levels: Array<string> = ["Beginner", "Intermediate", "Advanced"];
-  const equipments: Array<string> = ["Barbell", "Dumbbell", "Cables", "Machine", "Bodyweight only"];
+  const equipments: Array<string> = [
+    "Barbell",
+    "Dumbbell",
+    "Cables",
+    "Machine",
+    "Bodyweight only",
+  ];
 
   const [selectedGoal, setGoal] = useState<number>(0);
   const [selectedDays, setDays] = useState<number>(1);
@@ -27,10 +37,10 @@ export default function Landing(){
   const [selectedLevel, setLevel] = useState<number>(0);
   const [selectedEquipment, setEquipment] = useState<Array<number>>([]);
 
-  async function handleGeneratePlan(event: React.FormEvent<HTMLFormElement>){
+  async function handleGeneratePlan(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if(selectedEquipment.length === 0){
+    if (selectedEquipment.length === 0) {
       alert("Please select at least one equipment");
       return;
     }
@@ -44,9 +54,9 @@ export default function Landing(){
       length: selectedLength,
       level: levels[selectedLevel],
       equipment: selectedEquipment.map((index) => equipments[index]),
-    }
+    };
 
-    try{
+    try {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -71,17 +81,17 @@ export default function Landing(){
     }
   }
 
-  return(
+  return (
     <>
-      {isLoading ?
+      {isLoading ? (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 text-white text-3xl animate-pulse flex-col gap-4 text-center ">
           <div className="loader"></div>
           Generating your plan...
         </div>
-      : null}
+      ) : null}
 
       <div className="wrapper flex flex-1 h-full not-lg:flex-col">
-        <div  className="wrapper wrapper-left flex flex-col justify-center py-15 px-12 not-lg:w-full min-w-[50%]">
+        <div className="wrapper wrapper-left flex flex-col justify-center py-15 px-12 not-lg:w-full min-w-[50%]">
           <div className="wrapper-left--tag text-(--wpg-main-text-color) text-[11px] mb-6 tracking-[3px]">
             AI-POWERED TRAINING
           </div>
@@ -89,17 +99,18 @@ export default function Landing(){
           <div className="wrapper-left--title text-[88px] leading-[0.92] mb-7 uppercase">
             <h1 className="not-lg:text-[13vw]">
               build
-              <br/>
+              <br />
               your
-              <br/>
+              <br />
               <span className="text-(--wpg-main-text-color)">perfect</span>
-              <br/>
+              <br />
               program
             </h1>
           </div>
 
           <p className="wrapper-left--sub text-[15px] text-(--wpg-muted-text-color) max-w-95 mb-10 leading-[1.7]">
-            Answer a few questions. Get a personalized weekly workout plan built for your body, your goals, and your schedule.
+            Answer a few questions. Get a personalized weekly workout plan built
+            for your body, your goals, and your schedule.
           </p>
 
           {/* <div className="flex gap-3">
@@ -118,10 +129,7 @@ export default function Landing(){
         </div>
 
         <div className="wrapper wrapper-right flex justify-center items-center not-lg:w-full w-[50%] h-auto py-15 px-12 bg-[#1a1a1a] border-l border-[#2e2e2e]">
-          <form
-            className="w-full"
-            onSubmit={handleGeneratePlan}
-          >
+          <form className="w-full" onSubmit={handleGeneratePlan}>
             <div className="w-full mb-7">
               <div className="text-[28px] mb-1.5 tracking-[1px]">
                 Your details
@@ -148,7 +156,7 @@ export default function Landing(){
                     >
                       {goal}
                     </button>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -161,17 +169,31 @@ export default function Landing(){
                 <div>
                   <select
                     className="w-full bg-(--wpg-card-color) border border-(--wpg-border-color) text-white px-4 py-3 text-[14px] font-light outline-0"
-                    onChange={ (e) => setDays(parseInt(e.target.value))}
+                    onChange={(e) => setDays(parseInt(e.target.value))}
                     defaultValue={1}
                     aria-label="Select number of days"
                   >
-                    <option label="1" value="1" className="bg-[#242424]">1 day</option>
-                    <option label="2" value="2" className="bg-[#242424]">2 days</option>
-                    <option label="3" value="3" className="bg-[#242424]">3 days</option>
-                    <option label="4" value="4" className="bg-[#242424]">4 days</option>
-                    <option label="5" value="5" className="bg-[#242424]">5 days</option>
-                    <option label="6" value="6" className="bg-[#242424]">6 days</option>
-                    <option label="7" value="7" className="bg-[#242424]">7 days</option>
+                    <option label="1" value="1" className="bg-[#242424]">
+                      1 day
+                    </option>
+                    <option label="2" value="2" className="bg-[#242424]">
+                      2 days
+                    </option>
+                    <option label="3" value="3" className="bg-[#242424]">
+                      3 days
+                    </option>
+                    <option label="4" value="4" className="bg-[#242424]">
+                      4 days
+                    </option>
+                    <option label="5" value="5" className="bg-[#242424]">
+                      5 days
+                    </option>
+                    <option label="6" value="6" className="bg-[#242424]">
+                      6 days
+                    </option>
+                    <option label="7" value="7" className="bg-[#242424]">
+                      7 days
+                    </option>
                   </select>
                 </div>
               </div>
@@ -182,14 +204,22 @@ export default function Landing(){
                 <div>
                   <select
                     className="w-full bg-(--wpg-card-color) border border-(--wpg-border-color) text-white px-4 py-3 text-[14px] font-light outline-0"
-                    onChange={ (e) => setLength(parseInt(e.target.value))}
+                    onChange={(e) => setLength(parseInt(e.target.value))}
                     defaultValue={30}
                     aria-label="Select session length"
                   >
-                    <option label="30 min" value="30" className="bg-[#242424]">30 min</option>
-                    <option label="45 min" value="45" className="bg-[#242424]">45 min</option>
-                    <option label="60 min" value="60" className="bg-[#242424]">60 min</option>
-                    <option label="90 min" value="90" className="bg-[#242424]">90 min</option>
+                    <option label="30 min" value="30" className="bg-[#242424]">
+                      30 min
+                    </option>
+                    <option label="45 min" value="45" className="bg-[#242424]">
+                      45 min
+                    </option>
+                    <option label="60 min" value="60" className="bg-[#242424]">
+                      60 min
+                    </option>
+                    <option label="90 min" value="90" className="bg-[#242424]">
+                      90 min
+                    </option>
                   </select>
                 </div>
               </div>
@@ -211,7 +241,7 @@ export default function Landing(){
                     >
                       {level}
                     </button>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -221,7 +251,6 @@ export default function Landing(){
                 equipment available
               </div>
               <div className="flex gap-2 flex-wrap">
-
                 {equipments.map((equipment, index) => {
                   return (
                     <button
@@ -229,7 +258,9 @@ export default function Landing(){
                       className={`text-[13px] cursor-pointer border px-4 py-2 ${selectedEquipment.includes(index) ? "text-(--wpg-accent-color) border-(--wpg-accent-color) bg-[rgba(232,255,71,.06)]" : "text-(--wpg-muted-text-color) border-(--wpg-border-color)"}`}
                       onClick={() => {
                         if (selectedEquipment.includes(index)) {
-                          setEquipment(selectedEquipment.filter((item) => item !== index));
+                          setEquipment(
+                            selectedEquipment.filter((item) => item !== index),
+                          );
                         } else {
                           setEquipment([...selectedEquipment, index]);
                         }
@@ -239,7 +270,7 @@ export default function Landing(){
                     >
                       {equipment}
                     </button>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -255,8 +286,19 @@ export default function Landing(){
                 aria-label="Generate my plan button"
               >
                 {isLoading ? "GENERATING..." : "GENERATE MY PLAN"}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 not-lg:size-4">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6 not-lg:size-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                  />
                 </svg>
               </button>
 
@@ -268,5 +310,5 @@ export default function Landing(){
         </div>
       </div>
     </>
-  )
+  );
 }
