@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { useSession } from "next-auth/react";
-import type { Exercise, Day, Plan } from "@/app/lib/costumeTypes";
+import type { Plan } from "@/app/lib/costumeTypes";
 import MessageComponent from "../components/MessageComponent";
 
 export default function Plan() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const [isDownloading, setIsDownloading] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -28,6 +27,7 @@ export default function Plan() {
 
   useEffect(() => {
     const stored = localStorage.getItem("currentPlan");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (stored) setPlan(JSON.parse(stored));
   }, []);
 
