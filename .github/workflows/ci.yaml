@@ -3,15 +3,18 @@ name: CI/CD pipeline
 on:
   push:
     branches:
-      -main
+      - main
 
   pull_request:
     branches:
-      -main
+      - main
 
 jobs:
   push:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: workout-plan-generator
 
     steps:
       - uses: actions/checkout@v4
@@ -20,8 +23,9 @@ jobs:
         with:
           node-version: 20
           cache: "npm"
+          cache-dependency-path: workout-plan-generator/package-lock.json
 
-      - run: npm CI
+      - run: npm ci
       - run: npm run format:check
       - run: npm run lint
       - run: npm run build
