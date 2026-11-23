@@ -29,4 +29,6 @@ jobs:
       - run: npm run format:check
       - run: npm run lint
       - run: npm run build
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
