@@ -3,8 +3,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { neon } from "@neondatabase/serverless";
 import { redirect } from "next/navigation";
 import PlanCard from "@/app/components/PlanCard";
-import type { Plan, Day, Exercise } from "../lib/costumeTypes";
-import PlanDialog from "../components/PlanDialog";
+import type { Plan, Day } from "../lib/costumeTypes";
 
 export default async function Saved() {
   const session = await getServerSession(authOptions);
@@ -83,7 +82,7 @@ export default async function Saved() {
 
       {plans.length > 0 && (
         <div className="flex flex-col gap-4 mt-10 w-full">
-          {plans.map((plan: any) => (
+          {plans.map((plan: Plan) => (
             <PlanCard key={plan.id} plan={plan} />
           ))}
         </div>

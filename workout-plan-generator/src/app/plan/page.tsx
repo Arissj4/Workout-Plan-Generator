@@ -106,7 +106,7 @@ export default function Plan() {
         setFailedSave(true);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setFailedSave(true);
     } finally {
       setIsSaving(false);
