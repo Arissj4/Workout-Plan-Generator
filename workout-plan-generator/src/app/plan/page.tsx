@@ -57,7 +57,7 @@ export default function Plan() {
 
       let y = 60;
 
-      plan?.days.forEach((dayPlan, index) => {
+      plan?.days.forEach((dayPlan) => {
         if (!dayPlan.isRest) {
           doc.text(`${dayPlan.day} - ${dayPlan.focus}`, 20, y);
 
@@ -106,6 +106,7 @@ export default function Plan() {
         setFailedSave(true);
       }
     } catch (error) {
+      console.log(error)
       setFailedSave(true);
     } finally {
       setIsSaving(false);
