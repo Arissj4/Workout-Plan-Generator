@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Header from "./header";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
 import SessionWrapper from "@/app/components/SessionWrapper";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";

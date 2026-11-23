@@ -75,6 +75,7 @@ export default function Landing() {
         router.push("/plan");
       }
     } catch (error) {
+      console.log(error)
       setError("Something went wrong, please try again later.");
     } finally {
       setIsLoading(false);
